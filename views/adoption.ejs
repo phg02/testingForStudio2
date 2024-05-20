@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- DONE -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This page allow users to adopt pets">
+    <title>PawPals</title>
+    <link rel="stylesheet" href="/stylesheet/adoption.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/797e28e901.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kreon:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg" href="/images/logo.svg">
+</head>
+<%if (user.theme === 'light'){%>
+    <body>
+    <%} else{%>
+    <body data-theme="dark">
+    <%}%>
+    <div class="main">
+
+        <div class="wrapper">
+            <%if (user.theme === 'light'){%>
+                <img src="/images/dogcat.svg" alt="adopt">
+                <%} else{%>
+                <img src="/images/dogcatdark.svg" alt="adopt">
+                <%}%>
+           
+
+            <form aria-label="Search and Sort Form">
+                <div class="search-bar">
+                    <div class="top">
+                        <div class="search">
+                            <input type="text" placeholder="Search..." aria-label="Search Input">
+                            <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                        <div class="sortby">
+                            <select name="sortby" id="sortby" aria-label="Sort By Type of Pet">
+                                <option disabled selected>Type of pet</option> 
+                                <option>Cat</option>
+                                <option>Dog</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="cards" aria-label="Pet Cards">
+                <div class="card" aria-label="Pet Card">
+                    <img src="/images/dogcol1.jpg" alt="cat1">
+
+                    <div class="description" aria-label="Pet Description">
+                        <div>Black cat</div>
+                        <div class="money">$100</div>
+                    </div>
+                    
+                    <div class="btn">
+                        <a href="/adoption/listing"><div class="see-more" aria-label="See More Button">See more</div></a>
+                    </div>
+                </div>
+
+                <div class="card" aria-label="Pet Card">
+                    <img src="/images/dogcol1.jpg" alt="cat1">
+
+                    <div class="description" aria-label="Pet Description">
+                        <div>Black cat</div>
+                        <div class="money">$100</div>
+                    </div>
+                    
+                    <div class="btn">
+                        <a href="/adoption/listing"><div class="see-more" aria-label="See More Button">See more</div></a>
+                    </div>
+                </div>
+                
+
+                <div class="card" aria-label="Pet Card">
+                    <img src="/images/dogcol1.jpg" alt="cat1">
+
+                    <div class="description" aria-label="Pet Description">
+                        <div>Black cat</div>
+                        <div class="money">$100</div>
+                    </div>
+                    
+                    <div class="btn">
+                        <a href="/adoption/listing"><div class="see-more" aria-label="See More Button">See more</div></a>
+                    </div>
+                </div>
+
+                <div class="card" aria-label="Pet Card">
+                    <img src="/images/dogcol1.jpg" alt="cat1">
+
+                    <div class="description" aria-label="Pet Description">
+                        <div>Black cat</div>
+                        <div class="money">$100</div>
+                    </div>
+                    
+                    <div class="btn">
+                        <a href="/adoption/listing"><div class="see-more" aria-label="See More Button">See more</div></a>
+                    </div>
+                </div>
+
+                <div class="card" aria-label="Pet Card">
+                    <img src="/images/dogcol1.jpg" alt="cat1">
+
+                    <div class="description" aria-label="Pet Description">
+                        <div>Black cat</div>
+                        <div class="money">$100</div>
+                    </div>
+                    
+                    <div class="btn">
+                        <a href="/adoption/listing"><div class="see-more" aria-label="See More Button">See more</div></a>
+                    </div>
+                </div>
+                
+
+                <div class="card" aria-label="Pet Card">
+                    <img src="/images/dogcol1.jpg" alt="cat1">
+
+                    <div class="description" aria-label="Pet Description">
+                        <div>Black cat</div>
+                        <div class="money">$100</div>
+                    </div>
+                    
+                    <div class="btn">
+                        <a href="/adoption/listing"><div class="see-more" aria-label="See More Button">See more</div></a>
+                    </div>
+                </div>
+
+            </div>
+           
+                <button class="pag" aria-label="Load More Button">Load more</button>
+            
+        </div>
+        
+        <nav class="navbar" aria-label="Main Navigation">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/community" class="nav-link" aria-label="Community">
+                        <i class="fa-solid fa-people-group"></i>
+                        <p class="nav-text">Community</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/adoption" class="nav-link" aria-label="Adoption">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p class="nav-text">Adoption</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/adoption/createlisting" class="nav-link" aria-label="Sell pet">
+                        <i class="fa-solid fa-square-plus"></i>
+                        <p class="nav-text">Sell pet</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/user/postprofile" class="nav-link" aria-label="Profile">
+                        <i class="fa-solid fa-user"></i>
+                        <p class="nav-text">Profile</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/setting" class="nav-link" aria-label="Setting">
+                        <i class="fa-solid fa-gear"></i>
+                        <p class="nav-text">Setting</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+</body>
+</html>

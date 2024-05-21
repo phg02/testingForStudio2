@@ -5,12 +5,80 @@ const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
+const imageMimeType = ['image/jpeg', 'image/png', 'image/gif'];
+const fs = require('fs');
+const path = require('path');
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, '/uploads/profilepic')
+//     },
+//     // fileFilter: function (req, file, cb) {
+//     //         cb(null, imageMimeType.includes(file.mimetype),);
+//     // },
+//     filename: function (req, file, cb) {
+//         const uniqueSuffix = Date.now()+'-'+file.originalname;
+//         cb(null, uniqueSuffix)
+//     }
+// });
+//   const upload = multer({ storage: storage}); 
+// Define file filter to only accept JPEG and PNG files
+// const fileFilter = (req, file, cb) => {
+//     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+//       cb(null, true); // Accept file
+//     } else {
+//       cb(new Error('Invalid file type. Only JPEG and PNG files are allowed.'), false); // Reject file
+//     }
+//   };
+const storage = multer.diskStorage({
+    // Set the destination directory for uploaded files
+    destination: (req, file, cb) => {
+      cb(null,'public/images/uploads/'); // Files will be saved in the 'uploads/' directory
+    },
+    // Set the filename for uploaded files
+    filename: (req, file, cb) => {
+      // Prepend the current timestamp to the original filename to ensure uniqueness
+      cb(null, Date.now() + '-' + file.originalname);
+    }
+  });
+  
+  // Create a Multer instance with the configured storage settings
+  const upload = multer({ storage: storage }).single('myFile');
 
 //setting
 router.get('/', ensureAuthenticated, (req, res) => {
     res.render('setting', { user: req.user });
 })
 
+//update profile picture
+router.post('/updateprofile', upload ,async (req, res) => {
+    try{
+        // if(req.file.filename !== undefined || req.file !== null){
+        //     throw new Error('Please select a file');
+        // }
+        if(req.file.mimetype !== 'image/jpeg' && req.file.mimetype !== 'image/png' && req.file.mimetype !== 'image/gif'){
+            throw new Error('Please select a valid image file');
+        }
+        // if (err instanceof multer.MulterError) {
+        //     // Handle Multer-specific errors
+        //     throw new(multer.MulterError)
+        // } else {
+        //     // Handle custom errors
+        //     throw new Error(err.message);     
+        // }
+        let profilepath = req.file.path;
+        profilepath = profilepath.replace('public', '');
+        let user = await User.findById(req.user.id);
+        user.profile = profilepath;
+        await user.save();
+        res.redirect('/setting');
+    }
+    catch(err){
+        res.render('settingError', { user: req.user, error: err.message }); 
+    }
+});
+
+//change theme
 router.put('/updatetheme', ensureAuthenticated, async (req, res) => {
     let user = await User.findById(req.user.id);
     if (req.body.switchTheme) {

@@ -5,6 +5,7 @@ const router = express.Router();
 //stuff fot post
 const multer = require('multer');
 const Post = require('../models/Post');
+const path = require('path');
 //copy
 const {ensureAuthenticated,forwardAuthenticated} =require('../config/auth');
 
@@ -21,7 +22,16 @@ const storage = multer.diskStorage({
   });
   
   // Create a Multer instance with the configured storage settings
-  const upload = multer({ storage: storage }).single('myFile');
+  const upload = multer({ storage: storage,
+    fileFilter: (req, file, cb) => {
+        let ext = path.extname(file.originalname);
+        if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+             req.fileValidationError = "Please select a valid image file";
+             return cb(null, false, req.fileValidationError);
+       }
+       cb(null, true);
+    }
+   }).single('myFile');
 
 //comunity page
 
@@ -43,10 +53,13 @@ router.post('/createpost',ensureAuthenticated, upload ,async (req, res) => {
     
     try{
         let imagepath;
+        if (req.fileValidationError) {
+            throw new Error(req.fileValidationError);
+       }
         if(req.file != null){
-            if(req.file.mimetype !== 'image/jpeg' && req.file.mimetype !== 'image/png' && req.file.mimetype !== 'image/gif'){
-                throw new Error('Please select a valid image file');
-            }
+            if (req.fileValidationError) {
+                throw new Error(req.fileValidationError);
+           }
             imagepath = req.file.path;
             imagepath = imagepath.replace('public', '');
         }
@@ -63,7 +76,7 @@ router.post('/createpost',ensureAuthenticated, upload ,async (req, res) => {
         console.log(post);
         res.redirect('/community');
     }catch(err){
-        console.log(err);
+        res.render('settingError', { user: req.user, error: err.message });
     }
 });
 

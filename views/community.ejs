@@ -146,13 +146,34 @@
                         </form>
                         
                         <div>
-                            <div type="button" class="commentBtn" data-modal-target="#modal" aria-label="Comment on post">
+                            <div type="button" class="commentBtn" aria-label="Comment on post">
                                 <i class="fa-regular fa-comment d-inline"></i>
                             </div>
                             <p>100</p>
                         </div>
                     </div>
                 </div>
+
+
+                <!--id cái modal ni là report, cái data-modal-target của cái nút report kia là #report-->
+                <div class="modal haha" id="report" role="dialog" aria-labelledby="report-title" aria-modal="true">
+                    <div class="modal-header2">
+                        <button data-close-button class="close-button" aria-label="Close">&times;</button>
+                    </div>
+                
+                    <div class="modal-body2">
+                        <p>Are you sure you want to report this post?</p>
+                        <div>
+                            <button class="reportBtn">Report</button>
+                            <button class="cancelBtn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
 
                 <div class="card">
                     <div class="card-header">
@@ -164,7 +185,7 @@
                             
                             <div class="dropdown">
                                 <button>...</button>
-                                <div class="report hidden" data-modal-target="#report">Report post</div>
+                                <div class="report hidden" data-modal-target="#report2">Report post</div>
                             </div>
                         </div>
 
@@ -202,13 +223,29 @@
                         </form>
                         
                         <div>
-                            <div type="button" class="commentBtn" data-modal-target="#modal1"  aria-label="Comment on post">
+                            <div type="button" class="commentBtn" aria-label="Comment on post">
                                 <i class="fa-regular fa-comment d-inline"></i>
                             </div>
                             <p>100</p>
                         </div>
                     </div>
                 </div> 
+
+                <!--id cái modal ni là report2, cái data-modal-target của cái nút report kia là #report2-->
+                <div class="modal haha" id="report2" role="dialog" aria-labelledby="report-title" aria-modal="true">
+                    <div class="modal-header2">
+                        <button data-close-button class="close-button" aria-label="Close">&times;</button>
+                    </div>
+                
+                    <div class="modal-body2">
+                        <p>Are you sure you want to report this post?</p>
+                        <div>
+                            <button class="reportBtn">Report</button>
+                            <button class="cancelBtn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
                 
             </div>
             <div class="pag">
@@ -217,95 +254,6 @@
         </div>
     </div>
 <!-- THIRD -->
-    <div class="modal" id="modal" role="dialog" aria-labelledby="modal-title1" aria-modal="true" >
-        <div class="modal-header">
-            <div class="information">
-                <div class="infor">
-                    <img src="images/dogcol1.jpg" alt="dog">
-                    <p>Username . dd/mm/yyyy</p>
-                </div>
-
-                <button data-close-button class="close-button" aria-label="Close">&times;</button>
-            </div>
-        </div>
-
-        <div class="modal-body">
-            <div class="text">
-                <div>Lorem ipsum</div>
-                <div class="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas doloribus error eligendi explicabo
-                    esse distinctio placeat blanditiis? Nesciunt, eaque, cupiditate tempore vero sed doloribus quae
-                    numquam asperiores saepe, pariatur illum.</div>
-            </div>
-            <img src="images/catcol1.jpg" alt="dog">
-        </div>
-
-        <div class="modal-footer">
-            <div class="cmt-section">
-                <img src="images/dogcol1.jpg" alt="dog">
-
-                <div class="content">
-                    <div class="username">Username</div>
-                    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas doloribus error eligendi
-                        explicabo esse distinctio placeat blanditiis? Nesciunt, eaque, cupiditate tempore vero sed
-                        doloribus quae numquam asperiores saepe, pariatur illum.</div>
-                </div>
-            </div>
-
-
-            <div class="modal-cmt">
-                <img src="images/dogcol1.jpg" alt="dog">
-                <form>
-                    <input type="text" class="comment-input" placeholder="Write a comment...">
-                    <button id="comment-btn">Comment</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="modal1" role="dialog" aria-labelledby="modal-title2" aria-modal="true">
-        <div class="modal-header">
-            <div class="information">
-                <div class="infor">
-                    <img src="images/dogcol1.jpg" alt="dog">
-                    <p>Username . dd/mm/yyyy</p>
-                </div>
-
-                <button data-close-button class="close-button">&times;</button>
-            </div>
-        </div>
-
-        <div class="modal-body">
-            <div class="text">
-                <div>Lorem ipsum</div>
-                <div class="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas doloribus error eligendi explicabo
-                    esse distinctio placeat blanditiis? Nesciunt, eaque, cupiditate tempore vero sed doloribus quae
-                    numquam asperiores saepe, pariatur illum.</div>
-            </div>
-        </div>
-
-        <div class="modal-footer">
-            <div class="cmt-section">
-                <img src="images/dogcol1.jpg" alt="dog">
-
-                <div class="content">
-                    <div class="username">Username</div>
-                    <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas doloribus error eligendi
-                        explicabo esse distinctio placeat blanditiis? Nesciunt, eaque, cupiditate tempore vero sed
-                        doloribus quae numquam asperiores saepe, pariatur illum.</div>
-                </div>
-            </div>
-
-
-            <div class="modal-cmt">
-                <img src="images/dogcol1.jpg" alt="dog">
-                <form>
-                    <input type="text" class="comment-input" placeholder="Write a comment...">
-                    <button id="comment-btn">Comment</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
     <div class="modal" id="report" role="dialog" aria-labelledby="report-title" aria-modal="true">
         <div class="modal-header2">
             <button data-close-button class="close-button" aria-label="Close">&times;</button>

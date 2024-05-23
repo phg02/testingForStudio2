@@ -16,6 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg" href="/images/logo.svg">
+    <!-- IMPORTANT ADD FOR MAIN REPO -->
+    <script src="/javascript/adoptionAutoSubmit.js" defer></script>
 </head>
 <%if (user.theme === 'light'){%>
     <body>
@@ -32,18 +34,31 @@
                 <%}%>
            
 
-            <form aria-label="Search and Sort Form" action="/adoption" method="GET">
+            <form aria-label="Search and Sort Form" id="petSearchForm" action="/adoption" method="GET">
                 <div class="search-bar">
                     <div class="top">
                         <div class="search">
-                            <input type="text" placeholder="Search..." aria-label="Search Input" name="search">
+                            <input type="text" placeholder="Search..." aria-label="Search Input" name="search" value="<%=search.search%>">
                             <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         <div class="sortby">
-                            <select name="petType" id="sortby" aria-label="Sort By Type of Pet">
-                                <option disabled selected>Type of pet</option> 
-                                <option value="Cat">Cat</option>
-                                <option value="Dog">Dog</option>
+                            <select name="petType" id="sortby" aria-label="Sort By Type of Pet" onchange="autoSubmit()">
+                                <%if(search.petType == '' || search.petType == null){%>
+                                    <option disabled selected>Type of pet</option>
+                                <%}else{%>
+                                    <option  value="All">All</option> 
+                                <%}%>
+                                <%if(search.petType == 'Cat'){%>
+                                    <option value="Cat" selected>Cat</option>
+                                <%}else{%>
+                                    <option value="Cat">Cat</option>
+                                <%}%>
+                                <%if(search.petType == 'Dog'){%>
+                                    <option value="Dog" selected>Dog</option>
+                                <%}else{%>
+                                    <option value="Dog">Dog</option>
+                                <%}%>
+
                             </select>
                         </div>
                     </div>

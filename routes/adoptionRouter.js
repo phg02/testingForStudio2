@@ -59,7 +59,7 @@ router.get('/',ensureAuthenticated, async (req, res) => {
         try{ 
             const allPosts = await query.populate('author').exec();
             console.log(allPosts);
-            res.render('adoption' , {user: req.user, allPosts: allPosts});
+            res.render('adoption' , {user: req.user, allPosts: allPosts, search: req.query, petType: req.query});
         }catch(err){
             console.log(err);
         }

@@ -109,8 +109,19 @@ router.post('/createlisting',ensureAuthenticated, upload ,async (req, res) => {
 });
 
 //listing route
-router.get('/listing',ensureAuthenticated ,(req, res) => {
-    res.render('sellPet' , {user: req.user})
+router.get('/listing/:id',ensureAuthenticated , async(req, res) => {
+    try{
+        const post = await AdoptionPost.findById(req.params.id).populate('author').exec();
+        res.render('sellPet' , {user: req.user, post: post});
+        // console.log(post);
+    }
+    catch{
+        res.redirect('/adoption');
+    }
+    
 });
+
+
+
 
 module.exports = router;

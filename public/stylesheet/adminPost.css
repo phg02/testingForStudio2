@@ -1,3 +1,4 @@
+*,
 *::after,
 *::before {
   box-sizing: border-box;
@@ -395,21 +396,21 @@ body[data-theme="dark"] {
     height: 700px;
     overflow-y: scroll;
   }
-  .haha{
+  #report{
     height: 400px;
     width: 600px;
     overflow: hidden;
   }
-  .haha .modal-header2{
+  #report .modal-header2{
     display: flex;
     justify-content: flex-end;
     padding: 5px 15px;
   }
-  .haha .modal-header2 button{
+  #report .modal-header2 button{
     font-size: 3rem;
     font-weight: 200;
   }
-  .haha .modal-body2{
+  #report .modal-body2{
     font-size: 20px;
     display: flex;
     padding: 50px 0px;
@@ -418,11 +419,11 @@ body[data-theme="dark"] {
     justify-content: center;
     gap: 1rem;
   }
-  .haha .modal-body2 div{
+  #report .modal-body2 div{
     display: flex;
     gap: 1rem;
   }
-  .haha .modal-body2 div button{
+  #report .modal-body2 div button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -454,6 +455,105 @@ body[data-theme="dark"] {
   
   .modal.active {
     transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .modal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .modal-header {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid var(--button-color);
+    background-color: var(--background-color);
+  }
+  .information {
+    display: flex;
+    justify-content: space-between;
+  }
+  .infor {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .close-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+  .infor img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    border-bottom: 1px solid var(--button-color);
+  }
+  .modal-body img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+  
+  .cmt-section {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .cmt-section img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .username{
+    color:var(--font-color);
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 10px 15px;
+    background-color: var(--content-cmt);
+    border-radius: 20px;
+    max-width: 90%;
+    word-wrap: break-word;
+  }
+  .content div:nth-child(2){
+    color: var(--sub-font-color);
+  }
+  
+  .modal-cmt {
+    border-top: 1px solid var(--button-color);
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    
+  }
+  .modal-cmt img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .modal-cmt form{
+    display: flex;
+    gap: 0.5rem;
+  }
+  .comment-input {
+    border-radius: 15px;
+    width: 25rem;
+    height: 40px;
+    padding: 5px;
+  }
+  
+  input::placeholder {
+    color: #3a3a3a;
   }
   
   #overlay {

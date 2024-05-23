@@ -32,7 +32,7 @@
                 <%}%>
            
 
-            <form aria-label="Search and Sort Form">
+            <form aria-label="Search and Sort Form" action="/adoption" method="GET">
                 <div class="search-bar">
                     <div class="top">
                         <div class="search">
@@ -42,8 +42,8 @@
                         <div class="sortby">
                             <select name="sortby" id="sortby" aria-label="Sort By Type of Pet">
                                 <option disabled selected>Type of pet</option> 
-                                <option>Cat</option>
-                                <option>Dog</option>
+                                <option value="Cat">Cat</option>
+                                <option value="Dog">Dog</option>
                             </select>
                         </div>
                     </div>
@@ -51,7 +51,22 @@
             </form>
 
             <div class="cards" aria-label="Pet Cards">
-                <div class="card" aria-label="Pet Card">
+                <%allPosts.forEach(post => {%>
+                    <div class="card" aria-label="Pet Card">
+                         <img src="<%=post.image%>" alt="cat1" class="postImage"> <!--remember to add this class -->
+                        <div class="description" aria-label="Pet Description">
+                            <div><%=post.title%></div>
+                            <div class="money">$<%=post.price%></div>
+                        </div>
+                        <div class="btn">
+                            <a href="/adoption/listing/<%=post._id%>"><div class="see-more" aria-label="See More Button">See more</div></a>
+                        </div>
+                    </div>
+                <%})%>
+            <%console.log(allPosts)%>
+
+
+                <!-- <div class="card" aria-label="Pet Card">
                     <img src="/images/dogcol1.jpg" alt="cat1">
 
                     <div class="description" aria-label="Pet Description">
@@ -129,7 +144,7 @@
                     <div class="btn">
                         <a href="/adoption/listing"><div class="see-more" aria-label="See More Button">See more</div></a>
                     </div>
-                </div>
+                </div> -->
 
             </div>
            

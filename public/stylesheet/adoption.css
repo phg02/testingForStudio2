@@ -350,3 +350,12 @@ a{
   background-color: var(--button-color);
   border-radius: 20px;
 }
+
+/* IMPORTANT NEED TO ADD THIS STYLE TO MAIN REPO */
+
+.postImage {
+  width:70%;
+  height:auto;
+  border-bottom: var(--nav-color) 1px solid;
+  aspect-ratio: 1/1;
+}

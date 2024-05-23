@@ -72,7 +72,7 @@
                 <div class="title-container" aria-label="Create Post Title">
                     <h1>Create post</h1>
                 </div>
-                <form class="layout-grid" aria-label="Create Post Form">
+                <form class="layout-grid" aria-label="Create Post Form" action="/adoption/createlisting" method="POST" enctype="multipart/form-data">
                     <div class="left">
                         <div class="drop-zone">
                             <span class="drop-zone__prompt">Add image to post</span>
@@ -90,10 +90,10 @@
                             <br>
                             <label for="sortby" class="custom-label post-label">Type of pet</label>
                             <br>
-                            <select name="sortby" class="create-post-input" id="sortby" aria-label="Type of pet">
+                            <select name="petType" class="create-post-input" id="sortby" aria-label="Type of pet">
                                 <option disabled selected>Type</option> 
-                                <option>Dog</option>
-                                <option>Cat</option>
+                                <option value="Dog">Dog</option>
+                                <option value="Cat">Cat</option>
                             </select>
                             <br>
                             <label for="description" class="custom-label post-label">Description</label>

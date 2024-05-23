@@ -35,12 +35,37 @@ const storage = multer.diskStorage({
 
 //comunity page
 
-router.get('/',ensureAuthenticated, (req, res) => {
+router.get('/',ensureAuthenticated, async (req, res) => {
     if(req.user.admin===true) {
         res.redirect('/admin/users');
         return;
     }
-    res.render('community' , {user: req.user})
+    else{
+        let query = Post.find();
+        if(req.query.search != null && req.query.search != ''){
+            query = query.regex('title', new RegExp(req.query.search, 'i'));
+    
+        }
+        if(req.query.sortby == 'old'){
+            query = query.sort({dateCreated: 1});
+        }
+        else{   
+            query = query.sort({dateCreated: -1});
+        }
+        if(req.query.startDate != null && req.query.startDate != ''){
+            query = query.where('dateCreated').gt(req.query.startDate);
+        }
+        if(req.query.endDate != null && req.query.endDate != ''){
+            query = query.where('dateCreated').lt(req.query.endDate);
+        }
+        try{ 
+            const allPosts = await query.populate('author').exec();
+            console.log(allPosts);
+            res.render('community' , {user: req.user, allPosts: allPosts});
+        }catch(err){
+            console.log(err);
+        }
+    }
 })
 
 //create post route

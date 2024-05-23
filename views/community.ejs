@@ -65,18 +65,18 @@
         </nav>
 
         <div class="wrapper">
-            <form aria-label="Search and filter form">
+            <form aria-label="Search and filter form" action="/community" method="GET">
                 <div class="search-bar">
                     <div class="top">
                         <div class="search">
-                            <input type="text" placeholder="Search..." aria-label="Search input">
-                            <button aria-label="Search button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input name="search" type="text" placeholder="Search..." aria-label="Search input">
+                            <button type="submit" aria-label="Search button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         <div class="sortby">
                             <select name="sortby" id="sortby" aria-label="Sort by">
                                 <option disabled selected>Sort by</option> 
-                                <option>Earliest post</option>
-                                <option>Latest post</option>
+                                <option value="new">Earliest post</option>
+                                <option value="old">Latest post</option>
                             </select>
                         </div>
                     </div>
@@ -84,75 +84,141 @@
                     <div class="bottom">
                         <p>Filter by date:</p>
                         <div class="start-date">
-                            <input type="date" placeholder="Start date" aria-label="Start date input">
+                            <input type="date" name="startDate" placeholder="Start date" aria-label="Start date input">
                         </div>
                         <div class="end-date">
-                            <input type="date" placeholder="End date" aria-label="End date input">
+                            <input type="date" name="endDate" placeholder="End date" aria-label="End date input">
                         </div>
                     </div>
                 </div>
             </form>
 <!-- SECOND -->
             <div class="cards">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="header-name">
-                            <div class="img-post">
-                                <img src="images/dogcol1.jpg" alt="dog">
-                                <p>Username . dd/mm/yyyy</p>
-                            </div>
-                            
-                            <div class="dropdown">
-                                <button aria-haspopup="true" aria-controls="report">...</button>
-                                <div class="report hidden" data-modal-target="#report">Report post</div>
-                            </div>
-                        </div>
 
-                        <div class="title">
-                            <div aria-labelledby="post-info">Lorem ipsum</div>
-                            <div class="post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas doloribus error eligendi explicabo esse distinctio placeat blanditiis? Nesciunt, eaque, cupiditate tempore</div>
-                        </div>
-                        <button class="see-more-btn">See more</button>
-                    </div>
-
-                    <div class="card-body">
-                        <img src="images/catcol1.jpg" alt="dog">
-                    </div>
-
-                    <div class="card-footer">
-                        <form>
-                            <div class="heart-container" title="Like">
-                                <input type="checkbox" class="checkbox" id="Give-It-An-Id" aria-label="Like post">
-                                <div class="svg-container">
-                                    <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
-                                        </path>
-                                    </svg>
-                                    <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                                        </path>
-                                    </svg>
-                                    <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-                                        <polygon points="10,10 20,20"></polygon>
-                                        <polygon points="10,50 20,50"></polygon>
-                                        <polygon points="20,80 30,70"></polygon>
-                                        <polygon points="90,10 80,20"></polygon>
-                                        <polygon points="90,50 80,50"></polygon>
-                                        <polygon points="80,80 70,70"></polygon>
-                                    </svg>
+                <%allPosts.forEach(post =>{%> 
+                    <%if (post.author.activate == true){%>
+                        <%if(post.image !== null){%>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="header-name">
+                                        <div class="img-post">
+                                            <img src="<%= post.author.profile%>" alt="profile image">
+                                            <p><%=post.author.username %> . <%= post.dateCreated.getDate()%>/<%= post.dateCreated.getMonth()%>/<%= post.dateCreated.getFullYear()%></p>
+                                        </div>
+                                        
+                                        <div class="dropdown">
+                                            <button aria-haspopup="true" aria-controls="report">...</button>
+                                            <div class="report hidden" data-modal-target="#report">Report post</div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="title">
+                                        <div aria-labelledby="post-info"><%= post.title%></div>
+                                        <div class="post-title"><%= post.description%></div>
+                                    </div>
+                                    <button class="see-more-btn">See more</button>
+                                </div>
+            
+                                <div class="card-body">
+                                    <img src="<%= post.image%>" alt="post img">
+                                </div>
+            
+                                <div class="card-footer">
+                                    <form>
+                                        <div class="heart-container" title="Like">
+                                            <input type="checkbox" class="checkbox" id="Give-It-An-Id" aria-label="Like post">
+                                            <div class="svg-container">
+                                                <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                                                    </path>
+                                                </svg>
+                                                <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                                    </path>
+                                                </svg>
+                                                <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                                                    <polygon points="10,10 20,20"></polygon>
+                                                    <polygon points="10,50 20,50"></polygon>
+                                                    <polygon points="20,80 30,70"></polygon>
+                                                    <polygon points="90,10 80,20"></polygon>
+                                                    <polygon points="90,50 80,50"></polygon>
+                                                    <polygon points="80,80 70,70"></polygon>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p>100</p>
+                                    </form>
+                                    
+                                    <div>
+                                        <div type="button" class="commentBtn" aria-label="Comment on post">
+                                            <i class="fa-regular fa-comment d-inline"></i>
+                                        </div>
+                                        <p>100</p>
+                                    </div>
                                 </div>
                             </div>
-                            <p>100</p>
-                        </form>
-                        
-                        <div>
-                            <div type="button" class="commentBtn" aria-label="Comment on post">
-                                <i class="fa-regular fa-comment d-inline"></i>
-                            </div>
-                            <p>100</p>
-                        </div>
-                    </div>
-                </div>
+                            
+                        <%}else{%>
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="header-name">
+                                        <div class="img-post">
+                                            <img src="<%= post.author.profile%>" alt="dog">
+                                            <p><%=post.author.username %> . <%= post.dateCreated.getDate()%>/<%= post.dateCreated.getMonth()%>/<%= post.dateCreated.getFullYear()%></p>
+                                        </div>
+                                        
+                                        <div class="dropdown">
+                                            <button>...</button>
+                                            <div class="report hidden" data-modal-target="#report2">Report post</div>
+                                        </div>
+                                    </div>
+            
+                                    <div class="title">
+                                        <div aria-labelledby="post-info"><%= post.title%></div>
+                                        <div class="post-title"><%= post.description%></div>
+                                    </div>
+                                    <button class="see-more-btn">See more</button>
+                                </div>
+            
+                                <div class="card-footer">
+                                    <form>
+                                        <div class="heart-container" title="Like">
+                                            <input type="checkbox" class="checkbox" id="Give-It-An-Id" aria-label="Like post">
+                                            <div class="svg-container">
+                                                <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                                                    </path>
+                                                </svg>
+                                                <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                                    </path>
+                                                </svg>
+                                                <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                                                    <polygon points="10,10 20,20"></polygon>
+                                                    <polygon points="10,50 20,50"></polygon>
+                                                    <polygon points="20,80 30,70"></polygon>
+                                                    <polygon points="90,10 80,20"></polygon>
+                                                    <polygon points="90,50 80,50"></polygon>
+                                                    <polygon points="80,80 70,70"></polygon>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <p>100</p>
+                                    </form>
+                                    
+                                    <div>
+                                        <div type="button" class="commentBtn" aria-label="Comment on post">
+                                            <i class="fa-regular fa-comment d-inline"></i>
+                                        </div>
+                                        <p>100</p>
+                                    </div>
+                                </div>
+                            </div> 
+                            
+                        <%}%>
+                     <%}%>
+                <%})%>
+                
 
 
                 <!--id cái modal ni là report, cái data-modal-target của cái nút report kia là #report-->
@@ -175,61 +241,7 @@
 
 
 
-                <div class="card">
-                    <div class="card-header">
-                        <div class="header-name">
-                            <div class="img-post">
-                                <img src="images/dogcol1.jpg" alt="dog">
-                                <p>Username . dd/mm/yyyy</p>
-                            </div>
-                            
-                            <div class="dropdown">
-                                <button>...</button>
-                                <div class="report hidden" data-modal-target="#report2">Report post</div>
-                            </div>
-                        </div>
-
-                        <div class="title">
-                            <div aria-labelledby="post-info">Lorem ipsum</div>
-                            <div class="post-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas doloribus error eligendi explicabo esse distinctio placeat blanditiis? Nesciunt, eaque, cupiditate tempore</div>
-                        </div>
-                        <button class="see-more-btn">See more</button>
-                    </div>
-
-                    <div class="card-footer">
-                        <form>
-                            <div class="heart-container" title="Like">
-                                <input type="checkbox" class="checkbox" id="Give-It-An-Id" aria-label="Like post">
-                                <div class="svg-container">
-                                    <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
-                                        </path>
-                                    </svg>
-                                    <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
-                                        </path>
-                                    </svg>
-                                    <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-                                        <polygon points="10,10 20,20"></polygon>
-                                        <polygon points="10,50 20,50"></polygon>
-                                        <polygon points="20,80 30,70"></polygon>
-                                        <polygon points="90,10 80,20"></polygon>
-                                        <polygon points="90,50 80,50"></polygon>
-                                        <polygon points="80,80 70,70"></polygon>
-                                    </svg>
-                                </div>
-                            </div>
-                            <p>100</p>
-                        </form>
-                        
-                        <div>
-                            <div type="button" class="commentBtn" aria-label="Comment on post">
-                                <i class="fa-regular fa-comment d-inline"></i>
-                            </div>
-                            <p>100</p>
-                        </div>
-                    </div>
-                </div> 
+        
 
                 <!--id cái modal ni là report2, cái data-modal-target của cái nút report kia là #report2-->
                 <div class="modal haha" id="report2" role="dialog" aria-labelledby="report-title" aria-modal="true">

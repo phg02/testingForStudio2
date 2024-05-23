@@ -65,18 +65,30 @@
         </nav>
 
         <div class="wrapper">
-            <form aria-label="Search and filter form" action="/community" method="GET">
+            <form aria-label="Search and filter form" action="/community" method="GET" id="searchform">
                 <div class="search-bar">
                     <div class="top">
                         <div class="search">
-                            <input name="search" type="text" placeholder="Search..." aria-label="Search input">
+                            <input name="search" type="text" placeholder="Search..." aria-label="Search input" value="<%= searchOptions.search%>">
                             <button type="submit" aria-label="Search button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         <div class="sortby">
-                            <select name="sortby" id="sortby" aria-label="Sort by">
-                                <option disabled selected>Sort by</option> 
-                                <option value="new">Earliest post</option>
-                                <option value="old">Latest post</option>
+                            <select name="sortby" id="sortby" aria-label="Sort by" onchange="autoSubmit()">
+                                <%if(searchOptions.sortby == '' || searchOptions.sortby== null){%>
+                                    <option disabled selected>Sort by</option>
+                                <%}else{%>
+                                    <option disabled>Sort by</option>
+                                <%}%>
+                                <%if(searchOptions.sortby == 'new'){%>
+                                    <option value="new" selected>Newest post</option>
+                                <%}else{%>
+                                    <option value="new">Newest</option>
+                                <%}%>
+                                <%if(searchOptions.sortby == 'old'){%>
+                                    <option value="old" selected>Oldest post</option>
+                                <%}else{%>
+                                    <option value="old">Oldest post</option>
+                                <%}%>  
                             </select>
                         </div>
                     </div>
@@ -84,10 +96,10 @@
                     <div class="bottom">
                         <p>Filter by date:</p>
                         <div class="start-date">
-                            <input type="date" name="startDate" placeholder="Start date" aria-label="Start date input">
+                            <input type="date" name="startDate" placeholder="Start date" aria-label="Start date input" value="<%= searchOptions.startDate%>" onchange="autoSubmit()">
                         </div>
                         <div class="end-date">
-                            <input type="date" name="endDate" placeholder="End date" aria-label="End date input">
+                            <input type="date" name="endDate" placeholder="End date" aria-label="End date input" value="<%= searchOptions.endDate%>" onchange="autoSubmit()">
                         </div>
                     </div>
                 </div>

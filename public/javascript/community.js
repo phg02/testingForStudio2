@@ -133,3 +133,7 @@ function submitComment() {
     alert('Please enter a valid comment.');
   }
 }
+
+function autoSubmit() {
+  document.querySelector("#searchform").submit();
+}

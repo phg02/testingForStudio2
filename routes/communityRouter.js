@@ -53,15 +53,14 @@ router.get('/',ensureAuthenticated, async (req, res) => {
             query = query.sort({dateCreated: -1});
         }
         if(req.query.startDate != null && req.query.startDate != ''){
-            query = query.where('dateCreated').gt(req.query.startDate);
+            query = query.where('dateCreated').gte(req.query.startDate);
         }
         if(req.query.endDate != null && req.query.endDate != ''){
-            query = query.where('dateCreated').lt(req.query.endDate);
+            query = query.where('dateCreated').lte(req.query.endDate);
         }
         try{ 
             const allPosts = await query.populate('author').exec();
-            console.log(allPosts);
-            res.render('community' , {user: req.user, allPosts: allPosts});
+            res.render('community' , {user: req.user, allPosts: allPosts, searchOptions: req.query});
         }catch(err){
             console.log(err);
         }

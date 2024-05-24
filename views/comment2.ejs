@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hehe</title>
+    <link rel="stylesheet" href="/stylesheet/comment2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/797e28e901.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kreon:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="main">
+
+        <div class="wrapper">
+            <div class="image">
+                <img src="<%= post.image%>" alt="cat">
+            </div>
+
+            <div class="comment-section">
+                <div class="escape">
+                    <a href="/community">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <div>back</div>
+                    </a>
+                </div>
+
+                <div class="hehe">
+                    <div class="card-header">
+                        <div class="header-name">
+                            <div class="img-post">
+                                <img src="<%= post.author.profile%>" alt="dog">
+                                <p><%=post.author.username %> . <%= post.dateCreated.getDate()%>/<%= post.dateCreated.getMonth()%>/<%= post.dateCreated.getFullYear()%></p>
+                            </div>
+                            
+                            <div class="dropdown">
+                                <button>...</button>
+                                <div class="report hidden" data-modal-target="#report">Report post</div>
+                            </div>
+                        </div>
+    
+                        <div class="title">
+                            <div><%= post.title%></div>
+                            <div class="post-title"><%= post.description%></div>
+                        </div>
+                        <button class="see-more-btn">See more</button>
+                    </div>
+    
+                    <div class="card-footer">
+                        <form>
+                            <div class="heart-container" title="Like">
+                                <input type="checkbox" class="checkbox" id="Give-It-An-Id">
+                                <div class="svg-container">
+                                    <svg viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z">
+                                        </path>
+                                    </svg>
+                                    <svg viewBox="0 0 24 24" class="svg-filled" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z">
+                                        </path>
+                                    </svg>
+                                    <svg class="svg-celebrate" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+                                        <polygon points="10,10 20,20"></polygon>
+                                        <polygon points="10,50 20,50"></polygon>
+                                        <polygon points="20,80 30,70"></polygon>
+                                        <polygon points="90,10 80,20"></polygon>
+                                        <polygon points="90,50 80,50"></polygon>
+                                        <polygon points="80,80 70,70"></polygon>
+                                    </svg>
+                                </div>
+                            </div>
+                            <p>100</p>
+                        </form>
+                        
+                        <div>
+                            <div type="button" class="commentBtn" data-modal-target="#modal">
+                                <i class="fa-regular fa-comment d-inline"></i>
+                            </div>
+                            <p>100</p>
+                        </div>
+                    </div>
+
+                    <div class="user-comment2">
+                        <img src="images/dogcol1.jpg" alt="dog">
+                            <form>
+                                <input type="text" class="comment-input2" placeholder="Write a comment...">
+                                <button id="comment-btn2">Comment</button>
+                            </form>
+                    </div>
+    
+                    <div class="box-comment">
+                        <div class="cmt-section">
+                            <img src="images/dogcol1.jpg" alt="dog">
+            
+                            <div class="content">
+                                <div class="username">Username</div>
+                                <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas doloribus error eligendi
+                                    explicabo esse distinctio placeat blanditiis? Nesciunt, eaque, cupiditate tempore vero sed
+                                    doloribus quae numquam asperiores saepe, pariatur illum.</div>
+                            </div>
+                        </div>
+
+                        <div class="cmt-section">
+                            <img src="images/dogcol1.jpg" alt="dog">
+            
+                            <div class="content">
+                                <div class="username">Username</div>
+                                <div class="text">Hahahahahahahahahahahahahahahahahahahahahahahahahahahaha</div>
+                            </div>
+                        </div>
+
+                        <div class="cmt-section">
+                            <img src="images/dogcol1.jpg" alt="dog">
+            
+                            <div class="content">
+                                <div class="username">Username</div>
+                                <div class="text">Mot con vit xoe ra hai cai canh, no keu rang, quac quac quac quac quac quac,
+                                    gap ho nuoc no bi ba bi bom, luc len bo, vay cai canh cho kho :3</div>
+                            </div>
+                        </div>
+
+                        <div class="cmt-section">
+                            <img src="/images/dogcol1.jpg" alt="dog">
+            
+                            <div class="content">
+                                <div class="username">Username</div>
+                                <div class="text">3.141592653589793238462643383279502884197169399375105820974944592307816406286</div>
+                            </div>
+                        </div>
+
+                        <div class="cmt-section">
+                            <img src="/images/dogcol1.jpg" alt="dog">
+            
+                            <div class="content">
+                                <div class="username">Username</div>
+                                <div class="text">2.7182818284590452353602874713527</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="user-comment">
+                    <img src="images/dogcol1.jpg" alt="dog">
+                        <form>
+                            <input type="text" class="comment-input" placeholder="Write a comment...">
+                            <button id="comment-btn">Comment</button>
+                        </form>
+                </div>
+                
+            </div>
+
+        </div>
+            
+
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="community.html" class="nav-link">
+                        <i class="fa-solid fa-people-group"></i>
+                        <p class="nav-text">Community</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="adoption.html" class="nav-link">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p class="nav-text">Adoption</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-square-plus"></i>
+                        <p class="nav-text">Create post</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="profile-post.html" class="nav-link">
+                        <i class="fa-solid fa-user"></i>
+                        <p class="nav-text">Profile</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="setting.html" class="nav-link">
+                        <i class="fa-solid fa-gear"></i>
+                        <p class="nav-text">Setting</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="modal" id="report">
+        <div class="modal-header2">
+            <button data-close-button class="close-button">&times;</button>
+        </div>
+    
+        <div class="modal-body2">
+            <p>Are you sure you want to report this post?</p>
+            <div>
+                <button class="reportBtn">Report</button>
+                <button class="cancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+    
+    <script src="javascript/comment2.js"></script>
+</body>
+</html>

@@ -20,13 +20,14 @@ const postSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    likes: {
-        type:[mongoose.Schema.Types.ObjectId],
-        ref: 'User'
-    },
     reported:{
         type: Boolean,
         default: false
+    },
+    deleted:{
+        type: Boolean,
+        default: false
+    
     }
 });
 

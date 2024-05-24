@@ -104,4 +104,21 @@ router.post('/createpost',ensureAuthenticated, upload ,async (req, res) => {
     }
 });
 
+router.get('/imgpost/:id',ensureAuthenticated, async (req, res) => {
+    try{
+        const post = await Post.findById(req.params.id).populate('author').exec();
+        res.render('comment2', {user: req.user, post: post});
+    }catch(err){
+        console.log(err);
+    }
+})
+router.get('/post/:id',ensureAuthenticated, async (req, res) => {
+    try{
+        const post = await Post.findById(req.params.id).populate('author').exec();
+        res.render('comment', {user: req.user, post: post});
+    }catch(err){
+        console.log(err);
+    }
+})
+
 module.exports = router;

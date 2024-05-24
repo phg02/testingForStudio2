@@ -217,7 +217,7 @@ footer p{
     }
     footer{
         height: 48vh;
-        width: 100vw;
+        width: 100%;
         background-color: #232B40;
     }
 }

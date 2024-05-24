@@ -59,7 +59,7 @@
         </nav>
         <!-- Keep the wrapper -->
         <div class="wrapper">
-            <form aria-label="Search and Sort Form">
+            <form aria-label="Search and Sort Form" id="userForm" action="/admin/users" method="GET">
                 <div class="search-bar">
                     <div class="top">
                         <div class="bigText">
@@ -67,14 +67,22 @@
                         </div>
                         <div class="upBar">
                             <div class="search">
-                                <input type="text" placeholder="Search user..." aria-label="Search User Input">
+                                <input type="text" placeholder="Search user..." aria-label="Search User Input" name="search" value="<%=search.search%>">
                                 <button aria-label="Search Button"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                             <div class="sortby">
-                                <select name="sortby" id="sortby" aria-label="Sort By Selection">
-                                    <option disabled selected>Sort by</option> 
-                                    <option>Newest user</option>
-                                    <option>Oldest user</option>
+                                <select name="sortby" id="sortby" aria-label="Sort By Selection" onchange="autoSubmit()">
+                                    <option disabled selected>Sort by</option>
+                                    <%if (search.sortby == 'Newest user'){%>
+                                        <option value="Newest user" selected>Newest user</option>
+                                    <%}else{%>
+                                        <option value="Newest user">Newest user</option>
+                                    <%}%>
+                                    <%if (search.sortby == 'Oldest user'){%>
+                                        <option value="Oldest user" selected>Oldest user</option>
+                                    <%}else{%>
+                                        <option value="Oldest user">Oldest user</option>
+                                    <%}%>
                                 </select>
                             </div>
                         </div>
@@ -84,51 +92,22 @@
                 
             </form>
             <div class="wrapper2">
-                <div class="admin" aria-label="User Information">
-                    <div class="inside">
-                        <img src="/images/dogcol1.jpg" alt="profile">
-                        <div class="text">
-                            <h3>Username</h3>
-                            <p>Joined since: dd/mm/yyyy</p>   
-                        </div>
-                    </div>    
+                <%allUsers.forEach(user => {%>
+                    <div class="admin" aria-label="User Information">
+                        <div class="inside">
+                            <img src="<%=user.profile%>" alt="profile" class="userProfile">
+                            <div class="text">
+                                <h3><%=user.username%></h3>
+                                <p>Joined since: <%=user.dateCreated.getDate()%>/<%=(user.dateCreated.getMonth()+1)%>/<%=user.dateCreated.getFullYear()%></p>   
+                            </div>
+                        </div>    
             
-                    <div class="btn">
-                        <a href="/admin/userprofile"><button class="checkBtn" aria-label="Check Posts Button">Check posts</button></a>
-                        <button class="deleteBtn" data-modal-target="#deleteModal" aria-label="Delete Account Button">Delete account</button>
-                    </div>
-                </div>
-
-                <div class="admin" aria-label="User Information">
-                    <div class="inside">
-                        <img src="/images/dogcol1.jpg" alt="profile">
-                        <div class="text">
-                            <h3>Username</h3>
-                            <p>Joined since: dd/mm/yyyy</p>   
+                        <div class="btn">
+                            <a href="/admin/userprofile"><button class="checkBtn" aria-label="Check Posts Button">Check posts</button></a>
+                            <button class="deleteBtn" data-modal-target="#deleteModal" aria-label="Delete Account Button">Delete account</button>
                         </div>
-                    </div>    
-            
-                    <div class="btn">
-                        <a href="/admin/userprofile"><button class="checkBtn" aria-label="Check Posts Button">Check posts</button></a>
-                        <button class="deleteBtn" data-modal-target="#deleteModal" aria-label="Delete Account Button">Delete account</button>
                     </div>
-                </div>
-
-                <div class="admin" aria-label="User Information">
-                    <div class="inside">
-                        <img src="/images/dogcol1.jpg" alt="profile">
-                        <div class="text">
-                            <h3>Username</h3>
-                            <p>Joined since: dd/mm/yyyy</p>   
-                        </div>
-                    </div>    
-            
-                    <div class="btn">
-                        <a href="/admin/userprofile"><button class="checkBtn" aria-label="Check Posts Button">Check posts</button></a>
-                        <button class="deleteBtn" data-modal-target="#deleteModal" aria-label="Delete Account Button">Delete account</button>
-                    </div>
-                </div>
-
+                <%})%>
             </div>
         </div>
     </div>
@@ -152,5 +131,6 @@
     <div id="overlay"></div>
 
     <script src="/javascript/admin.js"></script>
+    <script src="/javascript/adminUserAutoSubmit.js" defer></script>
 </body>
 </html>

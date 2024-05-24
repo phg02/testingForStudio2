@@ -10,9 +10,23 @@ const User = require('../models/User');
 const { route } = require('./settingRouter');
 
 //manage user
-router.get('/users',ensureAuthenticated, ensureAuthenticatedAdmin, (req, res) => {
-    res.render('adminUser', {user: req.user} )
-})
+router.get('/users',ensureAuthenticated, ensureAuthenticatedAdmin, async (req, res) => {
+    let query = User.find();
+    if (req.query.search != null && req.query.search != '') {
+        query = query.regex('username', new RegExp(req.query.search, 'i'));
+    }
+    if (req.query.sortby == 'Newest user') {
+        query = query.sort({dateCreated: -1});
+    } else {
+        query = query.sort({dateCreated: 1});
+    }    
+    try {
+        const allUsers = await query.exec();
+        res.render('adminUser', {user: req.user, allUsers: allUsers, search: req.query})
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 //manage post
 router.get('/post',ensureAuthenticated, ensureAuthenticatedAdmin ,(req, res) => {

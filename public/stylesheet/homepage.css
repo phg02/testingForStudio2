@@ -49,7 +49,7 @@ nav {
 .whiteblank{
     background-color: white;
     height: 5vh;
-    width: 100vw;
+    width: 100%;
 }
 
 .dog-img > img {

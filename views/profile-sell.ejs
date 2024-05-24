@@ -57,7 +57,7 @@
                 <!-- add condition for author later -->
                 <div class="profile-sell">
                     <%allAdoption.forEach(post =>{%>
-                        <% console.log(post.id)%>
+                        
                     <div class="card">
                         <img src="<%=post.image%>" alt="Pet for sale" class="postImage">
     
@@ -130,7 +130,7 @@
     </div>
     
     <%allAdoption.forEach(post =>{%>
-        <% console.log("Hello" + post.id)%>
+        
         <div class="modal box2" id="<%= post.id.substring(post.id.length-4)%>" role="dialog" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
             <div class="modal-header2">
                 <button data-close-button class="close-button" aria-label="Close dialog">&times;</button>

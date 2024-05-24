@@ -27,18 +27,18 @@
         <div class="wrapper">
             <div class="profile">
                 <div class="profile-info">
-                    <img src="/images/dogcol1.jpg" alt="Profile picture" class="profile-img">
+                    <img src="<%=user.profile%>" alt="Profile picture" class="profile-img">
 
                     <div class="profile-detail">
                         <div class="profile-name">
-                            <div id="profile-name" aria-labelledby="profile-name">John Doe</div>
+                            <div id="profile-name" aria-labelledby="profile-name"><%=user.username%></div>
                             <a href="/setting" aria-label="Settings">
                                 <i class="fa-solid fa-gear"></i>
                             </a>
                         </div>
 
                         <div class="profile-follow">
-                            <div>0 posts</div>
+                            <div><%= allAdoption.length%> posts</div>
                         </div>
                     </div>
                 </div>
@@ -56,12 +56,13 @@
                 </div>
 
                 <div class="profile-sell">
+                    <%allAdoption.forEach(post =>{%>
                     <div class="card">
-                        <img src="/images/catcol1.jpg" alt="Pet for sale">
+                        <img src="<%=post.image%>" alt="Pet for sale" class="postImage">
     
                         <div class="description">
                             <div>
-                                <div>Black cat</div>
+                                <div><%=post.title%></div>
 
                                 <div class="dropdown">
                                     <button aria-label="a button">...</button>
@@ -69,120 +70,15 @@
                                 </div>
                             </div>
 
-                            <div class="money">$100</div>
+                            <div class="money">$<%=post.price%></div>
                         </div>
                         
                         <div class="btn">
-                            <a href="/adoption/listing" role="button" aria-label="See more"><div class="see-more">See more</div></a>
+                            <a href="/adoption/listing/<%=post._id%>" role="button" aria-label="See more"><div class="see-more">See more</div></a>
                         </div>
                     </div>
-    
-                    <div class="card">
-                        <img src="/images/catcol1.jpg" alt="Pet for sale">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button aria-label="a button">...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>
-                        </div>
+                    <%})%>
                         
-                        <div class="btn">
-                            <a href="/adoption/listing" role="button" aria-label="See more"><div class="see-more">See more</div></a>
-                        </div>
-                    </div>
-                    
-    
-                    <div class="card">
-                        <img src="/images/catcol1.jpg" alt="Pet for sale">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button aria-label="a button">...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>
-                        </div>
-                        
-                        <div class="btn">
-                            <a href="/adoption/listing" role="button" aria-label="See more"><div class="see-more">See more</div></a>
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <img src="/images/catcol1.jpg" alt="Pet for sale">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button aria-label="a button">...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>
-                        </div>
-                        
-                        <div class="btn">
-                            <a href="/adoption/listing" role="button" aria-label="See more"><div class="see-more">See more</div></a>
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <img src="/images/catcol1.jpg" alt="Pet for sale">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button aria-label="a button">...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>
-                        </div>
-                        
-                        <div class="btn">
-                            <a href="/adoption/listing" role="button" aria-label="See more"><div class="see-more">See more</div></a>
-                        </div>
-                    </div>
-                    
-    
-                    <div class="card">
-                        <img src="/images/catcol1.jpg" alt="Pet for sale">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button aria-label="a button">...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>
-                        </div>
-                        
-                        <div class="btn">
-                            <a href="/adoption/listing" role="button" aria-label="See more"><div class="see-more">See more</div></a>
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="pag">
@@ -247,7 +143,7 @@
     </div>
 
     <div id="overlay"></div>
-    <script src="javascript/adoption.js"></script>
+    <script src="/javascript/adoption.js"></script>
     
 </body>
 </html>

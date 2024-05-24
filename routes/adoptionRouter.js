@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const router = express.Router();
 
+
+
+
 //stuff fot post
 const multer = require('multer');
 const AdoptionPost = require('../models/AdoptionPost');
@@ -45,7 +48,7 @@ router.get('/',ensureAuthenticated, async (req, res) => {
     else{
         
 
-        let query = AdoptionPost.find();
+        let query = AdoptionPost.find({delete: false}).sort({dateCreated: -1});
 
         if(req.query.search != null && req.query.search != ''){
             query = query.regex('title', new RegExp(req.query.search, 'i'));    
@@ -60,6 +63,7 @@ router.get('/',ensureAuthenticated, async (req, res) => {
             const allPosts = await query.populate('author').exec();
             console.log(allPosts);
             res.render('adoption' , {user: req.user, allPosts: allPosts, search: req.query, petType: req.query});
+            // allPosts.save()
         }catch(err){
             console.log(err);
         }
@@ -121,7 +125,24 @@ router.get('/listing/:id',ensureAuthenticated , async(req, res) => {
     
 });
 
-
+//delete route
+router.put('/listing/:id', ensureAuthenticated, async (req, res) => {
+    try {
+        let post = await AdoptionPost.findById(req.params.id);
+        if (post) {
+            // post.delete = true; 
+            post.delete = true;
+            await post.save();
+            res.redirect('/user/sellerprofile');
+        } else {
+            throw new Error('Post not found');
+        }
+    } catch (err) {
+        console.error(err);
+        res.redirect('/adoption');
+    }
+    
+});
 
 
 

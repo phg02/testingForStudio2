@@ -7,7 +7,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const app = express();
-
+app.use(methodOverride('_method'));
 
 //set up view engine
 app.set('views', __dirname + '/views');

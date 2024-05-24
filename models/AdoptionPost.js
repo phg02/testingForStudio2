@@ -35,6 +35,11 @@ const adoptionPostSchema = new mongoose.Schema({
         type: String
     },
 
+    delete: {
+        type: Boolean,
+        default: false
+    }
+
     
 
     

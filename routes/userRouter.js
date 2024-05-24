@@ -23,9 +23,9 @@ router.get('/postprofile',ensureAuthenticated, async (req, res) => {
 //seller profile route
 router.get('/sellerprofile',ensureAuthenticated , async(req, res) => {
     try{
-        let allAdoption = await AdoptionPost.find({author: req.user._id}).populate('author').sort({dateCreated: -1}).exec();
+        let allAdoption = await AdoptionPost.find({author: req.user._id}).populate('author').sort({dateCreated: -1}).where('delete').equals(false).exec();
         res.render('profile-sell', {user: req.user, allAdoption: allAdoption})
-        console.log(allAdoption);
+        
     }
     catch(err){
         console.log(err);

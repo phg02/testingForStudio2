@@ -212,23 +212,28 @@ body[data-theme="dark"] {
     height: 700px;
     overflow-y: scroll;
   }
-  #report{
+  /* id report becomes class box2 IMPORTANT */
+  .box2
+  {
     height: 400px;
     width: 600px;
     overflow: hidden;
   }
-  #report .modal-header2{
+  .box2
+   .modal-header2{
     display: flex;
     justify-content: flex-end;
     padding: 5px 15px;
   }
-  #report .modal-header2 button{
+  .box2
+   .modal-header2 button{
     font-size: 3rem;
     font-weight: 200;
     background-color: transparent;
     border: none;
   }
-  #report .modal-body2{
+  .box2
+   .modal-body2{
     font-size: 20px;
     display: flex;
     padding: 50px 0px;
@@ -237,11 +242,13 @@ body[data-theme="dark"] {
     justify-content: center;
     gap: 1rem;
   }
-  #report .modal-body2 div{
+  .box2
+   .modal-body2 div{
     display: flex;
     gap: 1rem;
   }
-  #report .modal-body2 div button{
+  .box2
+   .modal-body2 div button{
     display: flex;
     justify-content: center;
     align-items: center;

@@ -57,7 +57,7 @@
                 <!-- add condition for author later -->
                 <div class="profile-sell">
                     <%allAdoption.forEach(post =>{%>
-                        
+                        <% console.log(post.id)%>
                     <div class="card">
                         <img src="<%=post.image%>" alt="Pet for sale" class="postImage">
     
@@ -67,7 +67,7 @@
 
                                 <div class="dropdown">
                                     <button aria-label="a button">...</button>
-                                    <div class="report hidden" data-modal-target="#<%= post.id.substring(post.id.length-4)%>">Delete post</div>
+                                    <div class="report hidden" data-modal-target="#<%= post.id.substring(post.id.length-6)%>">Delete post</div>
                                 </div>
                             </div>
 
@@ -130,8 +130,8 @@
     </div>
     
     <%allAdoption.forEach(post =>{%>
-        
-        <div class="modal box2" id="<%= post.id.substring(post.id.length-4)%>" role="dialog" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
+        <% console.log("Hello" + post.id)%>
+        <div class="modal box2" id="<%= post.id.substring(post.id.length-6)%>" role="dialog" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
             <div class="modal-header2">
                 <button data-close-button class="close-button" aria-label="Close dialog">&times;</button>
             </div>
@@ -142,7 +142,7 @@
                     <form action="/adoption/listing/<%=post.id%>?_method=PUT" method="POST">
                         <button class="reportBtn" aria-label="Confirm delete" type="submit">Delete</button>
                     </form>  
-                    <button class="cancelBtn" aria-label="Cancel delete" type="button" onclick="window.location.href='/profile-sell'">Cancel</button>
+                    <button class="cancelBtn" aria-label="Cancel delete" type="button"  href='/user/sellerprofile'">Cancel</button>
                 </div>
             </div>
         </div>

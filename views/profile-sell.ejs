@@ -66,7 +66,7 @@
 
                                 <div class="dropdown">
                                     <button aria-label="a button">...</button>
-                                    <div class="report hidden" data-modal-target="#<%= post.id.substring(post.id.length-6)%>">Delete post</div>
+                                    <div class="report hidden" data-modal-target="#<%= 'a' + post.id%>">Delete post</div>
                                 </div>
                             </div>
 
@@ -129,7 +129,7 @@
     </div>
     
     <%allAdoption.forEach(post =>{%>
-        <div class="modal box2" id="<%= post.id.substring(post.id.length-6)%>" role="dialog" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
+        <div class="modal box2" id="<%= 'a' + post.id%>" role="dialog" aria-labelledby="dialogTitle" aria-describedby="dialogDesc">
             <div class="modal-header2">
                 <button data-close-button class="close-button" aria-label="Close dialog">&times;</button>
             </div>

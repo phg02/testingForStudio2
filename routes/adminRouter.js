@@ -8,6 +8,7 @@ const {ensureAuthenticated,forwardAuthenticated, ensureAuthenticatedAdmin} =requ
 //User Model
 const User = require('../models/User');
 const { route } = require('./settingRouter');
+const Post = require('../models/Post');
 
 //manage user
 router.get('/users',ensureAuthenticated, ensureAuthenticatedAdmin, async (req, res) => {
@@ -29,8 +30,34 @@ router.get('/users',ensureAuthenticated, ensureAuthenticatedAdmin, async (req, r
 });
 
 //manage post
-router.get('/post',ensureAuthenticated, ensureAuthenticatedAdmin ,(req, res) => {
-    res.render('admin' , {user: req.user})
+router.get('/post',ensureAuthenticated, ensureAuthenticatedAdmin , async (req, res) => {
+    let query = Post.find();
+    if (req.query.search != null && req.query.search != '') {
+        query = query.regex('title', new RegExp(req.query.search, 'i'));
+    }
+    if (req.query.sortbyTime == 'Oldest posts') {
+        query = query.sort({dateCreated: 1});
+    } else {
+        query = query.sort({dateCreated: -1});
+    }
+    if (req.query.sortbyStatus == 'Reported posts') {
+        query = query.where('reported').equals(true);
+    }
+    if (req.query.sortbyStatus == 'Deleted posts') {
+        query = query.where('deleted').equals(true);
+    }
+    if (req.query.startDate != null && req.query.startDate != '') {
+        query = query.where('dateCreated').gte(req.query.startDate);
+    }
+    if (req.query.endDate != null && req.query.endDate != '') {
+        query = query.where('dateCreated').lte(req.query.endDate);
+    }
+    try {
+        const allPosts = await query.populate('author').exec();
+        res.render('admin' , {user: req.user, allPosts: allPosts, search: req.query})
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 //manage seeling post

@@ -49,9 +49,17 @@ router.get('/post',ensureAuthenticated, ensureAuthenticatedAdmin , async (req, r
     if (req.query.startDate != null && req.query.startDate != '') {
         query = query.where('dateCreated').gte(req.query.startDate);
     }
-    if (req.query.endDate != null && req.query.endDate != '') {
-        query = query.where('dateCreated').lte(req.query.endDate);
+    //function to get the true end date
+    function trueEndDate(date) {
+        let dateArray = date.split('-');
+        dateArray[2] = Number(dateArray[2]) + 1;
+        return dateArray.join('-');
     }
+    console.log(req.query.startDate);
+    if (req.query.endDate != null && req.query.endDate != '') {
+        query = query.where('dateCreated').lte(trueEndDate(req.query.endDate));
+    }
+    //modify above if needed
     try {
         const allPosts = await query.populate('author').exec();
         res.render('admin' , {user: req.user, allPosts: allPosts, search: req.query})

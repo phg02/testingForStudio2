@@ -11,7 +11,7 @@ const {ensureAuthenticated,forwardAuthenticated} =require('../config/auth');
 //post profile route
 router.get('/postprofile',ensureAuthenticated, async (req, res) => {
     try{
-        let allPosts = await Post.find({author: req.user._id}).populate('author').sort({dateCreated: -1}).exec();
+        let allPosts = await Post.find({author: req.user._id}).populate('author').where('deleted').equals(false).sort({dateCreated: -1}).exec();
         res.render('profile-post', {user: req.user, allPosts: allPosts})
     }
     catch(err){
@@ -32,5 +32,14 @@ router.get('/sellerprofile',ensureAuthenticated , async(req, res) => {
     }
 });
 
+router.put('/deletepost/:id',ensureAuthenticated, async (req, res) => {
+    try{
+        await Post.findByIdAndUpdate(req.params.id, {deleted: true});
+        res.redirect('/user/postprofile');
+    }
+    catch(err){
+        console.log(err);
+    }
+});
 
 module.exports = router;

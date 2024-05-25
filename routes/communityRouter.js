@@ -60,7 +60,7 @@ router.get('/',ensureAuthenticated, async (req, res) => {
             query = query.where('dateCreated').lte(req.query.endDate);
         }
         try{ 
-            const allPosts = await query.populate('author').exec();
+            const allPosts = await query.populate('author').where('deleted').equals(false).exec();
             res.render('community' , {user: req.user, allPosts: allPosts, searchOptions: req.query});
         }catch(err){
             console.log(err);

@@ -135,23 +135,23 @@ router.put('/report/:id',ensureAuthenticated, async (req, res) => {
     }
 });
 
-router.post('/comment/:id',ensureAuthenticated, async (req, res) => {
-    // try{
-    //     const newComment = new Comment({
-    //         comment: req.body.content,
-    //         author: req.user.id,
-    //         belongTo: req.params.id
-    //     });
-    //     newComment.save();
-    //     res.redirect('/community/post/'+req.params.id);
 
-    // }
-    // catch(err){
-    //     console.log(err);
-    // }
-     console.log(req.body.content);
-     console.log(req.body.content2);
-    res.redirect('/community');
+router.post('/comment/:id',ensureAuthenticated, async (req, res) => {
+    try{
+        const newComment = new Comment({
+            comment: req.body.content,
+            author: req.user.id,
+            belongTo: req.params.id
+        });
+        newComment.save();
+        res.redirect('/community/imgpost/'+req.params.id);
+
+    }
+    catch(err){
+        console.log(err);
+    }
 })
+
+
 
 module.exports = router;

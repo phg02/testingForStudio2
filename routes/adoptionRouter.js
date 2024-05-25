@@ -104,7 +104,6 @@ router.post('/createlisting',ensureAuthenticated, upload ,async (req, res) => {
             location: req.body.location
         })
         await post.save();
-        console.log(post);
         res.redirect('/adoption');
     }catch(err){
         res.render('settingError', { user: req.user, error: err.message });

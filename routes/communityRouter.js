@@ -7,8 +7,9 @@ const multer = require('multer');
 const Post = require('../models/Post');
 const path = require('path');
 //copy
+//comment
+const Comment = require('../models/Comment');
 const {ensureAuthenticated,forwardAuthenticated} =require('../config/auth');
-const { cp } = require('fs');
 
 const storage = multer.diskStorage({
     // Set the destination directory for uploaded files
@@ -108,7 +109,8 @@ router.post('/createpost',ensureAuthenticated, upload ,async (req, res) => {
 router.get('/imgpost/:id',ensureAuthenticated, async (req, res) => {
     try{
         const post = await Post.findById(req.params.id).populate('author').exec();
-        res.render('comment2', {user: req.user, post: post});
+        const comments = await Comment.find({belongTo: req.params.id}).populate('author').exec();
+        res.render('comment2', {user: req.user, post: post, comments: comments});
     }catch(err){
         console.log(err);
     }
@@ -132,5 +134,24 @@ router.put('/report/:id',ensureAuthenticated, async (req, res) => {
         console.log(err);
     }
 });
+
+router.post('/comment/:id',ensureAuthenticated, async (req, res) => {
+    // try{
+    //     const newComment = new Comment({
+    //         comment: req.body.content,
+    //         author: req.user.id,
+    //         belongTo: req.params.id
+    //     });
+    //     newComment.save();
+    //     res.redirect('/community/post/'+req.params.id);
+
+    // }
+    // catch(err){
+    //     console.log(err);
+    // }
+     console.log(req.body.content);
+     console.log(req.body.content2);
+    res.redirect('/community');
+})
 
 module.exports = router;

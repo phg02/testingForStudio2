@@ -87,10 +87,10 @@
                     </div>
 
                     <div class="user-comment2">
-                        <img src="images/dogcol1.jpg" alt="dog">
-                            <form>
-                                <input type="text" class="comment-input2" placeholder="Write a comment...">
-                                <button id="comment-btn2">Comment</button>
+                        <img src="<%= user.profile%>" alt="dog">
+                            <form action="/community/comment/<%= post.id%>" method="POST">
+                                <input type="text" class="comment-input2" name="content2" placeholder="Write a comment...">
+                                <button id="comment-btn2" type="submit">Comment</button>
                             </form>
                     </div>
     
@@ -147,10 +147,10 @@
                 
 
                 <div class="user-comment">
-                    <img src="images/dogcol1.jpg" alt="dog">
-                        <form>
-                            <input type="text" class="comment-input" placeholder="Write a comment...">
-                            <button id="comment-btn">Comment</button>
+                    <img src="<%= user.profile%>" alt="dog">
+                        <form action="/community/comment/<%= post.id%>" method="POST">
+                            <input type="text" class="comment-input" name="content" placeholder="Write a comment...">
+                            <button id="comment-btn" type="submit">Comment</button>
                         </form>
                 </div>
                 
@@ -208,7 +208,9 @@
         <div class="modal-body2">
             <p>Are you sure you want to report this post?</p>
             <div>
-                <button class="reportBtn">Report</button>
+                <form action="/community/report/<%= post.id%>?_method=PUT" method="POST">
+                    <button class="reportBtn">Report</button>
+                </form>
                 <button class="cancelBtn">Cancel</button>
             </div>
         </div>
@@ -216,6 +218,6 @@
 
     <div id="overlay"></div>
     
-    <script src="javascript/comment2.js"></script>
+    <script src="/javascript/comment2.js"></script>
 </body>
 </html>

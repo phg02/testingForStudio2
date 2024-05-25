@@ -65,12 +65,13 @@
                 </div>
             </form>
 
+            <!--em thêm cái class post-title zô dòng 74 nhe-->
             <div class="cards" aria-label="Pet Cards">
                 <%allPosts.forEach(post => {%>
                     <div class="card" aria-label="Pet Card">
                          <img src="<%=post.image%>" alt="cat1" class="postImage"> <!--remember to add this class -->
                         <div class="description" aria-label="Pet Description">
-                            <div><%=post.title%></div>
+                            <div class="post-title"><%=post.title%></div>
                             <div class="money">$<%=post.price%></div>
                         </div>
                         <div class="btn">

@@ -170,11 +170,22 @@ select {
 .description{
   padding: 8px 10px;
 }
-.description div{
+/*fix overflow text*/
+.description > div {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.post-title {
+  width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+
 .money{
   font-size: 14px;
   font-weight: 400;

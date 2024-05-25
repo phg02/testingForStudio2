@@ -8,6 +8,7 @@ const Post = require('../models/Post');
 const path = require('path');
 //copy
 const {ensureAuthenticated,forwardAuthenticated} =require('../config/auth');
+const { cp } = require('fs');
 
 const storage = multer.diskStorage({
     // Set the destination directory for uploaded files
@@ -120,5 +121,16 @@ router.get('/post/:id',ensureAuthenticated, async (req, res) => {
         console.log(err);
     }
 })
+
+router.put('/report/:id',ensureAuthenticated, async (req, res) => {
+    try{
+        const post = await Post.findById(req.params.id);
+        post.reported = true;
+        await post.save();
+        res.redirect('/community');
+    }catch(err){
+        console.log(err);
+    }
+});
 
 module.exports = router;

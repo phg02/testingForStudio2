@@ -190,9 +190,9 @@
                         </div>
                     
                         <div class="modal-body2">
-                            <p>Are you sure you want to report this post?<%= post.id%></p>
+                            <p>Are you sure you want to report this post?</p>
                             <div>
-                                <form action="/community/report/<%= post.id%>">
+                                <form action="/community/report/<%= post.id%>?_method=PUT" method="POST" >
                                     <button class="reportBtn">Report</button>
                                 </form>
                                 <button class="cancelBtn">Cancel</button>

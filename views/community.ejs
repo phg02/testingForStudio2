@@ -120,7 +120,7 @@
                                         
                                         <div class="dropdown">
                                             <button aria-haspopup="true" aria-controls="report">...</button>
-                                            <div class="report hidden" data-modal-target="#report">Report post</div>
+                                            <div class="report hidden" data-modal-target="#<%= post.id.substring(post.id.length-6)%>">Report post</div>
                                         </div>
                                     </div>
             
@@ -156,7 +156,7 @@
                                         
                                         <div class="dropdown">
                                             <button>...</button>
-                                            <div class="report hidden" data-modal-target="#report2">Report post</div>
+                                            <div class="report hidden" data-modal-target="#<%=post.id.substring(post.id.length-6)%>">Report post</div>
                                         </div>
                                     </div>
             
@@ -183,19 +183,24 @@
 
 
                 <!--id cái modal ni là report, cái data-modal-target của cái nút report kia là #report-->
-                <div class="modal haha" id="report" role="dialog" aria-labelledby="report-title" aria-modal="true">
-                    <div class="modal-header2">
-                        <button data-close-button class="close-button" aria-label="Close">&times;</button>
-                    </div>
-                
-                    <div class="modal-body2">
-                        <p>Are you sure you want to report this post?</p>
-                        <div>
-                            <button class="reportBtn">Report</button>
-                            <button class="cancelBtn">Cancel</button>
+                <% allPosts.forEach(post => {%>
+                    <div class="modal haha" id="<%= post.id.substring(post.id.length-6)%>" role="dialog" aria-labelledby="report-title" aria-modal="true">
+                        <div class="modal-header2">
+                            <button data-close-button class="close-button" aria-label="Close">&times;</button>
+                        </div>
+                    
+                        <div class="modal-body2">
+                            <p>Are you sure you want to report this post?<%= post.id%></p>
+                            <div>
+                                <form action="/community/report/<%= post.id%>">
+                                    <button class="reportBtn">Report</button>
+                                </form>
+                                <button class="cancelBtn">Cancel</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <%})%>
+               
 
 
 
@@ -230,7 +235,7 @@
 
     <div id="overlay"></div>
 
-    <script src="javascript/community.js"></script>
+    <script src="/javascript/community.js"></script>
 </body>
 
 </html>

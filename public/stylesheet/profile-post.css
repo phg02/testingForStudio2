@@ -374,21 +374,21 @@ body[data-theme="dark"] {
     height: 700px;
     overflow-y: scroll;
   }
-  #report{
+  .reportModal{
     height: 400px;
     width: 600px;
     overflow: hidden;
   }
-  #report .modal-header2{
+  .reportModal .modal-header2{
     display: flex;
     justify-content: flex-end;
     padding: 5px 15px;
   }
-  #report .modal-header2 button{
+  .reportModal .modal-header2 button{
     font-size: 3rem;
     font-weight: 200;
   }
-  #report .modal-body2{
+  .reportModal .modal-body2{
     font-size: 20px;
     display: flex;
     padding: 50px 0px;
@@ -397,11 +397,11 @@ body[data-theme="dark"] {
     justify-content: center;
     gap: 1rem;
   }
-  #report .modal-body2 div{
+  .reportModal .modal-body2 div{
     display: flex;
     gap: 1rem;
   }
-  #report .modal-body2 div button{
+  .reportModal .modal-body2 div button{
     display: flex;
     justify-content: center;
     align-items: center;

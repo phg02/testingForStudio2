@@ -59,7 +59,7 @@
 
                     <!-- //card img -->
                     <%allPosts.forEach(post =>{%>
-                        <%if(post.image !== null){%>
+                        <%if(post.image !== null){ console.log('id '+ post.id)%>
                             <div class="card">
                                 <div class="card-header">
                                     <div class="header-name">
@@ -70,7 +70,7 @@
                                         
                                         <div class="dropdown">
                                             <button aria-label="More options">...</button>
-                                            <div class="report hidden" data-modal-target="#report" aria-label="Delete post option">Delete post</div>
+                                            <div class="report hidden" data-modal-target="#<%= post.id.substring(post.id.length-5)%>" aria-label="Delete post option">Delete post</div>
                                         </div>
                                     </div>
                         
@@ -131,7 +131,7 @@
                                 
                                 <div class="dropdown">
                                     <button>...</button>
-                                    <div class="report hidden" data-modal-target="#report" aria-label="Delete post option">Delete post</div>
+                                    <div class="report hidden" data-modal-target="#<%= post.id.substring(post.id.length-5)%>" aria-label="Delete post option">Delete post</div>
                                 </div>
                             </div>
     
@@ -169,7 +169,7 @@
                             </form>
                             
                             <div>
-                                <div type="button" class="commentBtn" data-modal-target="#modal1" aria-label="Comment on post">
+                                <div type="button" class="commentBtn" data-modal-target="#comment" aria-label="Comment on post">
                                     <i class="fa-regular fa-comment d-inline"></i>
                                 </div>
                                 <p aria-label="Number of comments">100</p>
@@ -317,8 +317,9 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal" id="report" role="dialog" aria-labelledby="dialog3Title" aria-describedby="dialog3Desc">
+    <!-- copy css -->
+    <%allPosts.forEach(post =>{ console.log(post.id)%>
+    <div class="modal reportModal" id="<%= post.id.substring(post.id.length-5)%>" role="dialog" aria-labelledby="dialog3Title" aria-describedby="dialog3Desc">
         <div class="modal-header2">
             <button data-close-button class="close-button" aria-label="Close">&times;</button>
         </div>
@@ -331,8 +332,10 @@
             </div>
         </div>
     </div>
+    
 
     <div id="overlay"></div>
+    <%})%>
     <script src="/javascript/community.js"></script>
 </body>
 </html>

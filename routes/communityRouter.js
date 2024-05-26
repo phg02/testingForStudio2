@@ -118,15 +118,11 @@ router.get('/imgpost/:id',ensureAuthenticated, async (req, res) => {
         const comments = await Comment.find({belongTo: req.params.id}).populate('author').exec();
         const like = await Like.find({post: req.params.id});
         const userLike = await Like.findOne({post: req.params.id, user: req.user.id});
-        console.log(userLike)
         let verifyLike = false;
         if(userLike != null){
             verifyLike = true;
-            console.log("already liked");
         }
-        else{
-            console.log('not liked')
-        }
+
         res.render('comment2', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike});
     }catch(err){
         console.log(err);
@@ -136,7 +132,13 @@ router.get('/post/:id',ensureAuthenticated, async (req, res) => {
     try{
         const post = await Post.findById(req.params.id).populate('author').exec();
         const comments = await Comment.find({belongTo: req.params.id}).populate('author').exec();
-        res.render('comment', {user: req.user, post: post, comments: comments});
+        const like = await Like.find({post: req.params.id});
+        const userLike = await Like.findOne({post: req.params.id, user: req.user.id});
+        let verifyLike = false;
+        if(userLike != null){
+            verifyLike = true;
+        }
+        res.render('comment', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike});
     }catch(err){
         console.log(err);
     }

@@ -129,3 +129,8 @@ document.querySelector('.comment-input').addEventListener('keypress', function(e
 //     commentInput.value = '';
 //   } 
 // }
+function clickFn(event) {
+  const checkbox = event.currentTarget;
+  checkbox.value = checkbox.checked ? 'like' : 'removeLike';
+  event.currentTarget.closest('form').submit()
+}

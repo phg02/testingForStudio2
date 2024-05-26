@@ -57,8 +57,13 @@ router.get('/',ensureAuthenticated, async (req, res) => {
         if(req.query.startDate != null && req.query.startDate != ''){
             query = query.where('dateCreated').gte(req.query.startDate);
         }
+        function trueEndDate(date) {
+            let dateArray = date.split('-');
+            dateArray[2] = Number(dateArray[2]) + 1;
+            return dateArray.join('-');
+        }
         if(req.query.endDate != null && req.query.endDate != ''){
-            query = query.where('dateCreated').lte(req.query.endDate);
+            query = query.where('dateCreated').lte(trueEndDate(req.query.endDate));
         }
         try{ 
             const allPosts = await query.populate('author').where('deleted').equals(false).exec();

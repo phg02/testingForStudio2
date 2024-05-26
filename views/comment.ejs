@@ -14,13 +14,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<%if (user.theme === 'light'){%>
+    <body>
+    <%} else{%>
+    <body data-theme="dark">
+    <%}%>
 
     <div class="main">
 
         <div class="wrapper">
             <div class="escape">
-                <a href="/community">
+                <a href="<%= location%>">
                     <i class="fa-solid fa-arrow-left"></i>
                     <div>back</div>
                 </a>

@@ -112,7 +112,7 @@ router.post('/createpost',ensureAuthenticated, upload ,async (req, res) => {
     }
 });
 
-router.get('/imgpost/:id',ensureAuthenticated, async (req, res) => {
+router.get('/imgpost/:id/:origin',ensureAuthenticated, async (req, res) => {
     try{
         const post = await Post.findById(req.params.id).populate('author').exec();
         const comments = await Comment.find({belongTo: req.params.id}).populate('author').exec();
@@ -122,13 +122,18 @@ router.get('/imgpost/:id',ensureAuthenticated, async (req, res) => {
         if(userLike != null){
             verifyLike = true;
         }
-
-        res.render('comment2', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike});
+        if(req.params.origin == 'community'){
+            location = '/community';
+          }
+         else{
+            location = '/user/postprofile';
+          }
+        res.render('comment2', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike, location: location});
     }catch(err){
         console.log(err);
     }
 })
-router.get('/post/:id',ensureAuthenticated, async (req, res) => {
+router.get('/post/:id/:origin',ensureAuthenticated, async (req, res) => {
     try{
         const post = await Post.findById(req.params.id).populate('author').exec();
         const comments = await Comment.find({belongTo: req.params.id}).populate('author').exec();
@@ -138,7 +143,13 @@ router.get('/post/:id',ensureAuthenticated, async (req, res) => {
         if(userLike != null){
             verifyLike = true;
         }
-        res.render('comment', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike});
+        if(req.params.origin == 'community'){
+            location = '/community';
+          }
+         else{
+            location = '/user/postprofile';
+          }
+        res.render('comment', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike, location: location});
     }catch(err){
         console.log(err);
     }

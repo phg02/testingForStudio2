@@ -6,6 +6,7 @@ const router = express.Router();
 const multer = require('multer');
 const Post = require('../models/Post');
 const path = require('path');
+const Like = require('../models/LikePost');
 //copy
 //comment
 const Comment = require('../models/Comment');
@@ -115,7 +116,18 @@ router.get('/imgpost/:id',ensureAuthenticated, async (req, res) => {
     try{
         const post = await Post.findById(req.params.id).populate('author').exec();
         const comments = await Comment.find({belongTo: req.params.id}).populate('author').exec();
-        res.render('comment2', {user: req.user, post: post, comments: comments});
+        const like = await Like.find({post: req.params.id});
+        const userLike = await Like.findOne({post: req.params.id, user: req.user.id});
+        console.log(userLike)
+        let verifyLike = false;
+        if(userLike != null){
+            verifyLike = true;
+            console.log("already liked");
+        }
+        else{
+            console.log('not liked')
+        }
+        res.render('comment2', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike});
     }catch(err){
         console.log(err);
     }
@@ -165,6 +177,32 @@ router.post('/comment/:id/:origin',ensureAuthenticated, async (req, res) => {
         console.log(err);
     }
 })
+
+
+router.post('/like/:id/:origin',ensureAuthenticated, async (req, res) => {
+    let location;
+    try{
+        if(req.body.like == 'like'){
+            const newLike = new Like({
+                post: req.params.id,
+                user: req.user.id
+            });
+            newLike.save();
+        }
+        else{
+            await Like.deleteOne({post: req.params.id, user: req.user.id});
+        }
+        if(req.params.origin == 'imgpost'){
+            location = 'imgpost';
+          }
+        else{
+            location = 'post';
+          }
+        res.redirect('/community/'+location+'/'+req.params.id);
+    }catch(err){
+        console.log(err);
+    }
+});
 
 
 

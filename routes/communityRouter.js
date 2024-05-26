@@ -123,7 +123,8 @@ router.get('/imgpost/:id',ensureAuthenticated, async (req, res) => {
 router.get('/post/:id',ensureAuthenticated, async (req, res) => {
     try{
         const post = await Post.findById(req.params.id).populate('author').exec();
-        res.render('comment', {user: req.user, post: post});
+        const comments = await Comment.find({belongTo: req.params.id}).populate('author').exec();
+        res.render('comment', {user: req.user, post: post, comments: comments});
     }catch(err){
         console.log(err);
     }
@@ -141,15 +142,23 @@ router.put('/report/:id',ensureAuthenticated, async (req, res) => {
 });
 
 
-router.post('/comment/:id',ensureAuthenticated, async (req, res) => {
+router.post('/comment/:id/:origin',ensureAuthenticated, async (req, res) => {
+    let location;
     try{
         const newComment = new Comment({
             comment: req.body.content,
             author: req.user.id,
             belongTo: req.params.id
         });
+        if(req.params.origin == 'img'){
+          location = 'imgpost';
+        }
+        if(req.params.origin == 'noimg'){
+          location = 'post';
+        }
         newComment.save();
-        res.redirect('/community/imgpost/'+req.params.id);
+
+        res.redirect('/community/'+location+'/'+req.params.id);
 
     }
     catch(err){

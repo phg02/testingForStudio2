@@ -14,7 +14,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<%if (user.theme === 'light'){%>
+    <body>
+    <%} else{%>
+    <body data-theme="dark">
+    <%}%>
 
     <div class="main">
 
@@ -88,7 +92,7 @@
 
                     <div class="user-comment">
                         <img src="<%= user.profile%>" alt="dog">
-                            <form action="/community/comment/<%= post.id%>" method="POST">
+                            <form action="/community/comment/<%= post.id%>/img" method="POST">
                                 <input type="text" class="comment-input" name="content" placeholder="Write a comment...">
                                 <button id="comment-btn" type="submit">Comment</button>
                                 <!-- please delete submit comment -->

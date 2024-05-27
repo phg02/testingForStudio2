@@ -109,79 +109,44 @@
 
                 <%allPosts.forEach(post =>{%> 
                     <%if (post.author.activate == true){%>
-                        <%if(post.image !== null){%>
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="header-name">
-                                        <div class="img-post">
-                                            <img src="<%= post.author.profile%>" alt="profile image">
-                                            <p><%=post.author.username %> . <%= post.dateCreated.getDate()%>/<%=1+ post.dateCreated.getMonth()%>/<%= post.dateCreated.getFullYear()%></p>
-                                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="header-name">
+                                    <div class="img-post">
+                                        <img src="<%= post.author.profile%>" alt="profile image">
+                                        <p><%=post.author.username %> . <%= post.dateCreated.getDate()%>/<%=1+ post.dateCreated.getMonth()%>/<%= post.dateCreated.getFullYear()%></p>
+                                    </div>
                                         
-                                        <div class="dropdown">
-                                            <button aria-haspopup="true" aria-controls="report">...</button>
-                                            <div class="report hidden" data-modal-target="#<%= 'p'+post.id%>">Report post</div>
-                                        </div>
+                                    <div class="dropdown">
+                                        <button aria-haspopup="true" aria-controls="report">...</button>
+                                        <div class="report hidden" data-modal-target="#<%= 'p'+post.id%>">Report post</div>
                                     </div>
-            
-                                    <div class="title">
-                                        <div aria-labelledby="post-info"><%= post.title%></div>
-                                        <div class="post-title"><%= post.description%></div>
-                                    </div>
-                                    <button class="see-more-btn">See more</button>
                                 </div>
             
+                                <div class="title">
+                                    <div aria-labelledby="post-info"><%= post.title%></div>
+                                    <div class="post-title"><%= post.description%></div>
+                                </div>
+                                <button class="see-more-btn">See more</button>
+                            </div>
+            
+                            <%if(post.image !== null){%>
                                 <div class="card-body">
                                     <img src="<%= post.image%>" alt="post img">
                                 </div>
-            
-                                <div class="card-footer">
-                                    
-                                    <div>
-                                        <a href="/community/imgpost/<%= post.id%>/community"><div type="button" class="commentBtn" aria-label="Comment on post">
-                                            View full post
-                                        </div></a>
-                                    </div>
+                            <%}%>
+
+                            <div class="card-footer">    
+                                <div>
+                                    <a href="/community/imgpost/<%= post.id%>/community"><div type="button" class="commentBtn" aria-label="Comment on post">
+                                        View full post
+                                    </div></a>
                                 </div>
                             </div>
-                            
-                        <%}else{%>
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="header-name">
-                                        <div class="img-post">
-                                            <img src="<%= post.author.profile%>" alt="dog">
-                                            <p><%=post.author.username %> . <%= post.dateCreated.getDate()%>/<%= 1+ post.dateCreated.getMonth()%>/<%= post.dateCreated.getFullYear()%></p>
-                                        </div>
-                                        
-                                        <div class="dropdown">
-                                            <button>...</button>
-                                            <div class="report hidden" data-modal-target="#<%='p'+post.id%>">Report post</div>
-                                        </div>
-                                    </div>
-            
-                                    <div class="title">
-                                        <div aria-labelledby="post-info"><%= post.title%></div>
-                                        <div class="post-title"><%= post.description%></div>
-                                    </div>
-                                    <button class="see-more-btn">See more</button>
-                                </div>
-            
-                                <div class="card-footer">
-                                    <div>
-                                        <a href="/community/post/<%= post.id%>/community"><div type="button" class="commentBtn" aria-label="Comment on post">
-                                            View full post
-                                        </div></a>
-                                    </div>
-                                </div>
-                            </div> 
-                            
-                        <%}%>
-                     <%}%>
+                        </div>
+                    <%}%>
                 <%})%>
                 
-
-
                 <!--id cái modal ni là report, cái data-modal-target của cái nút report kia là #report-->
                 <% allPosts.forEach(post => {%>
                     <div class="modal haha" id="<%= 'p'+post.id%>" role="dialog" aria-labelledby="report-title" aria-modal="true">

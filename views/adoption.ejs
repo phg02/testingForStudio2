@@ -68,6 +68,7 @@
             <!--em thêm cái class post-title zô dòng 74 nhe-->
             <div class="cards" aria-label="Pet Cards">
                 <%allPosts.forEach(post => {%>
+                    <% if (post.author.activate == true){ %>
                     <div class="card" aria-label="Pet Card">
                          <img src="<%=post.image%>" alt="cat1" class="postImage"> <!--remember to add this class -->
                         <div class="description" aria-label="Pet Description">
@@ -78,6 +79,7 @@
                             <a href="/adoption/listing/<%=post._id%>"><div class="see-more" aria-label="See More Button">See more</div></a>
                         </div>
                     </div>
+                    <%}%>
                 <%})%>
 
             </div>

@@ -17,10 +17,10 @@ router.get('/users',ensureAuthenticated, ensureAuthenticatedAdmin, async (req, r
     if (req.query.search != null && req.query.search != '') {
         query = query.regex('username', new RegExp(req.query.search, 'i'));
     }
-    if (req.query.sortby == 'Newest user') {
-        query = query.sort({dateCreated: -1});
-    } else {
+    if (req.query.sortby == 'Oldest user') {
         query = query.sort({dateCreated: 1});
+    } else {
+        query = query.sort({dateCreated: -1});
     }    
     try {
         const allUsers = await query.exec();
@@ -94,8 +94,15 @@ router.get('/adoptionpost',ensureAuthenticated, ensureAuthenticatedAdmin ,(req, 
 });
 
 //admin user profile
-router.get('/userprofile',ensureAuthenticated, ensureAuthenticatedAdmin ,(req, res) => {
-    res.render('adminPost' , {user: req.user})
+router.get('/userprofile/:id',ensureAuthenticated, ensureAuthenticatedAdmin , async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        const allPosts = await Post.find().where('author').equals(req.params.id).populate('author').sort({dateCreated: -1}).exec();
+        console.log(allPosts);
+        res.render('adminPost' , {user: user, allPosts: allPosts})
+    } catch (err) {
+        console.log(err);
+    } 
 });
 
 //admin user profile sell

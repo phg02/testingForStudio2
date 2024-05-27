@@ -149,7 +149,7 @@ router.get('/post/:id/:origin',ensureAuthenticated, async (req, res) => {
          else{
             location = '/user/postprofile';
           }
-        res.render('comment', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike, location: location});
+        res.render('comment', {user: req.user, post: post, comments: comments, likes: like, check: verifyLike, location: location});    
     }catch(err){
         console.log(err);
     }
@@ -183,7 +183,7 @@ router.post('/comment/:id/:origin',ensureAuthenticated, async (req, res) => {
         }
         newComment.save();
 
-        res.redirect('/community/'+location+'/'+req.params.id);
+        res.redirect('/community/'+location+'/'+req.params.id+'/'+location);
 
     }
     catch(err){
@@ -211,7 +211,7 @@ router.post('/like/:id/:origin',ensureAuthenticated, async (req, res) => {
         else{
             location = 'post';
           }
-        res.redirect('/community/'+location+'/'+req.params.id);
+        res.redirect('/community/'+location+'/'+req.params.id+'/'+location);
     }catch(err){
         console.log(err);
     }

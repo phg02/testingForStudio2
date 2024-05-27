@@ -9,6 +9,7 @@ const {ensureAuthenticated,forwardAuthenticated, ensureAuthenticatedAdmin} =requ
 const User = require('../models/User');
 const { route } = require('./settingRouter');
 const Post = require('../models/Post');
+const AdoptionPost = require('../models/AdoptionPost');
 
 //manage user
 router.get('/users',ensureAuthenticated, ensureAuthenticatedAdmin, async (req, res) => {
@@ -55,7 +56,6 @@ router.get('/post',ensureAuthenticated, ensureAuthenticatedAdmin , async (req, r
         dateArray[2] = Number(dateArray[2]) + 1;
         return dateArray.join('-');
     }
-    console.log(req.query.startDate);
     if (req.query.endDate != null && req.query.endDate != '') {
         query = query.where('dateCreated').lte(trueEndDate(req.query.endDate));
     }
@@ -69,8 +69,23 @@ router.get('/post',ensureAuthenticated, ensureAuthenticatedAdmin , async (req, r
 });
 
 //manage seeling post
-router.get('/adoption',ensureAuthenticated, ensureAuthenticatedAdmin ,(req, res) => {
-    res.render('adminAdopt', {user: req.user})
+router.get('/adoption',ensureAuthenticated, ensureAuthenticatedAdmin, async (req, res) => {
+    let query = AdoptionPost.find();
+    if (req.query.search != null && req.query.search != '') {
+        query = query.regex('title', new RegExp(req.query.search, 'i'));
+    }
+    if (req.query.sortby == 'Dog') {
+        query = query.where('petType').equals('Dog');
+    }
+    if (req.query.sortby == 'Cat') {
+        query = query.where('petType').equals('Cat');
+    }
+    try {
+        const allPosts = await query.populate('author').exec();
+        res.render('adminAdopt', {user: req.user, allPosts: allPosts, search: req.query, petType: req.query})
+    } catch (err) {
+        console.log(err);
+    }
 })
 
 //pet post for admin

@@ -24,7 +24,7 @@
 
         <div class="wrapper">
 
-            <form>
+            <form aria-label="Search and Sort Form" id="petForm" action="/admin/adoption" method="GET">
                 <div class="search-bar">
                     <div class="top">
                         <div class="bigText">
@@ -32,153 +32,54 @@
                         </div>
                         <div class="hehe">
                             <div class="search">
-                                <input type="text" placeholder="Search user...">
-                                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <input type="text" placeholder="Search user..." aria-label="Search Input" name="search" value="<%=search.search%>">
+                                <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                             <div class="sortby">
-                                <select name="sortby" id="sortby">
-                                    <option disabled selected>Type of pet</option> 
-                                    <option>Dog</option>
-                                    <option>Cat</option>
+                                <select name="sortby" id="sortby" aria-label="Sort by Pet Type" onchange="autoSubmit()">
+                                    <option disabled selected>Type of pets</option>
+                                    <option value="All">All pets</option>
+                                    <%if (search.petType == 'Dog') {%>
+                                        <option value="Dog" selected>Dog</option>
+                                    <%} else {%>
+                                        <option value="Dog">Dog</option>
+                                    <%}%>
+                                    <%if (search.petType == 'Cat') {%>
+                                        <option value="Cat" selected>Cat</option>
+                                    <%} else {%>
+                                        <option value="Cat">Cat</option>
+                                    <%}%>
                                 </select>
                             </div>
                         </div>
-                
                     </div>                    
                 </div>
-                
             </form>
 
             <div class="cards">
-                <div class="card">
-                    <img src="/images/dogcol1.jpg" alt="cat1">
+                <%allPosts.forEach(adoptionPost => {%>
+                    <div class="card">
+                        <img src="<%=adoptionPost.image%>" alt="post image" class="postImage">
 
-                    <!--em thêm cái class post-title zô dòng 59 nhe-->
-                    <div class="description">
-                        <div>
-                            <div class="post-title">Black cat</div>
+                        <!--em thêm cái class post-title zô dòng 67 nhe-->
+                        <div class="description">
+                            <div>
+                                <div class="post-title"><%=adoptionPost.title%></div>
 
-                            <div class="dropdown">
-                                <button>...</button>
-                                <div class="report hidden" data-modal-target="#report">Delete post</div>
+                                <div class="dropdown">
+                                    <button>...</button>
+                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
+                                </div>
                             </div>
-                        </div>
                         
-                        <div class="money">$100</div> 
-                    </div>
+                            <div class="money"><%=adoptionPost.price%></div> 
+                        </div>
                     
-                    <div class="btn">
-                        <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="/images/dogcol1.jpg" alt="cat1">
-
-                    <div class="description">
-                        <div>
-                            <div>Black cat</div>
-
-                            <div class="dropdown">
-                                <button>...</button>
-                                <div class="report hidden" data-modal-target="#report">Delete post</div>
-                            </div>
+                        <div class="btn">
+                            <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
                         </div>
-                        
-                        <div class="money">$100</div> 
                     </div>
-            
-                    <div class="btn">
-                        <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
-                    </div>
-                </div>
-                
-
-                <div class="card">
-                    <img src="/images/dogcol1.jpg" alt="cat1">
-
-                    <div class="description">
-                        <div>
-                            <div>Black cat</div>
-
-                            <div class="dropdown">
-                                <button>...</button>
-                                <div class="report hidden" data-modal-target="#report">Delete post</div>
-                            </div>
-                        </div>
-                        
-                        <div class="money">$100</div>   
-                    </div>
-            
-                    <div class="btn">
-                        <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="/images/dogcol1.jpg" alt="cat1">
-
-                    <div class="description">
-                        <div>
-                            <div>Black cat</div>
-
-                            <div class="dropdown">
-                                <button>...</button>
-                                <div class="report hidden" data-modal-target="#report">Delete post</div>
-                            </div>
-                        </div>
-                        
-                        <div class="money">$100</div> 
-                    </div>
-                    
-                    <div class="btn">
-                        <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="/images/dogcol1.jpg" alt="cat1">
-
-                    <div class="description">
-                        <div>
-                            <div>Black cat</div>
-
-                            <div class="dropdown">
-                                <button>...</button>
-                                <div class="report hidden" data-modal-target="#report">Delete post</div>
-                            </div>
-                        </div>
-                        
-                        <div class="money">$100</div> 
-                    </div>
-            
-                    <div class="btn">
-                        <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
-                    </div>
-                </div>
-                
-
-                <div class="card">
-                    <img src="/images/dogcol1.jpg" alt="cat1">
-
-                    <div class="description">
-                        <div>
-                            <div>Black cat</div>
-
-                            <div class="dropdown">
-                                <button>...</button>
-                                <div class="report hidden" data-modal-target="#report">Delete post</div>
-                            </div>
-                        </div>
-
-                        <div class="money">$100</div>   
-                    </div>
-            
-                    <div class="btn">
-                        <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
-                    </div>
-                </div>
-
+                <%})%>
             </div>
            
                 <button class="pag">Load more</button>
@@ -235,5 +136,6 @@
     <div id="overlay"></div>
     
     <script src="/javascript/adminAdopt.js"></script>
+    <script src="/javascript/adminAdoptionAutoSubmit.js" defer></script>
 </body>
 </html>

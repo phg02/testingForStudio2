@@ -562,3 +562,8 @@ body.modal-open {
   background-color: var(--button-color);
   border-radius: 20px;
 }
+.postImage {
+  height:auto;
+  border-bottom: var(--nav-color) 1px solid;
+  aspect-ratio: 1/1;
+}

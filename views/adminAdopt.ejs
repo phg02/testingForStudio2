@@ -39,15 +39,15 @@
                                 <select name="sortby" id="sortby" aria-label="Sort by Pet Type" onchange="autoSubmit()">
                                     <option disabled selected>Type of pets</option>
                                     <option value="All">All pets</option>
-                                    <%if (search.petType == 'Dog') {%>
-                                        <option value="Dog" selected>Dog</option>
-                                    <%} else {%>
-                                        <option value="Dog">Dog</option>
-                                    <%}%>
                                     <%if (search.petType == 'Cat') {%>
                                         <option value="Cat" selected>Cat</option>
                                     <%} else {%>
                                         <option value="Cat">Cat</option>
+                                    <%}%>
+                                    <%if (search.petType == 'Dog') {%>
+                                        <option value="Dog" selected>Dog</option>
+                                    <%} else {%>
+                                        <option value="Dog">Dog</option>
                                     <%}%>
                                 </select>
                             </div>

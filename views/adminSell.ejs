@@ -32,160 +32,55 @@
 
             <div class="profile">
                 <div class="profile-info">
-                    <img src="/images/dogcol1.jpg" alt="profile" class="postImage">
+                    <img src="<%=user.profile%>" alt="profile" class="postImage">
 
                     <div class="profile-detail">
                         <div class="profile-name">
-                            <div>John Doe</div>
+                            <div><%=user.username%></div>
                         </div>
 
                         <div class="profile-follow">
-                            <div>0 posts</div>
+                            <div><%=allPosts.length%> posts</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="profile-select">
-                    <a href="/admin/userprofile" class="nav-link curr">
+                    <a href="" class="nav-link curr">
                         <i class="fa-solid fa-file"></i>
                         <p class="nav-text">Posts</p>
                     </a>
 
-                    <a href="/admin/sellprofile" class="nav-link">
+                    <a href="/admin/sellprofile/<%=user._id%>" class="nav-link">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <p class="nav-text">Sell</p>
                     </a>
                 </div>
 
                 <div class="profile-sell">
-                    <div class="card">
-                        <img src="/images/dogcol1.jpg" alt="cat1">
+                    <%allPosts.forEach (post => {%>
+                        <div class="card">
+                            <img src="<%=post.image%>" alt="post img">
 
-                        <!--em thêm cái class post-title zô dòng 67 nhe-->
-                        <div class="description">
-                            <div>
-                                <div class="post-title">Black cat</div>
+                            <!--em thêm cái class post-title zô dòng 67 nhe-->
+                            <div class="description">
+                                <div>
+                                    <div class="post-title"><%=post.title%></div>
 
-                                <div class="dropdown">
-                                    <button>...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
+                                    <div class="dropdown">
+                                        <button>...</button>
+                                        <div class="report hidden" data-modal-target="#report">Delete post</div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="money">$100</div>
-                        </div>
+                                <div class="money"><%=post.price%></div>
+                            </div>
                         
-                        <div class="btn">
-                            <div class="see-more">See more</div>
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <img src="/images/dogcol1.jpg" alt="cat1">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button>...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
+                            <div class="btn">
+                                <a href="/admin/adoption/listing/<%=post._id%>"><div class="see-more">See more</div></a>
                             </div>
-
-                            <div class="money">$100</div>
                         </div>
-                
-                        <div class="btn">
-                            <div class="see-more">See more</div>
-                        </div>
-                    </div>
-                    
-    
-                    <div class="card">
-                        <img src="/images/dogcol1.jpg" alt="cat1">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button>...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>   
-                        </div>
-                
-                        <div class="btn">
-                            <div class="see-more">See more</div>
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <img src="/images/dogcol1.jpg" alt="cat1">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button>...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>
-                        </div>
-                        
-                        <div class="btn">
-                            <div class="see-more">See more</div>
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <img src="/images/dogcol1.jpg" alt="cat1">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button>...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-
-                            <div class="money">$100</div>
-                        </div>
-                
-                        <div class="btn">
-                            <div class="see-more">See more</div>
-                        </div>
-                    </div>
-                    
-    
-                    <div class="card">
-                        <img src="/images/dogcol1.jpg" alt="cat1">
-    
-                        <div class="description">
-                            <div>
-                                <div>Black cat</div>
-
-                                <div class="dropdown">
-                                    <button>...</button>
-                                    <div class="report hidden" data-modal-target="#report">Delete post</div>
-                                </div>
-                            </div>
-                            
-                            <div class="money">$100</div>   
-                        </div>
-                
-                        <div class="btn">
-                            <div class="see-more">See more</div>
-                        </div>
-                    </div>
+                    <%})%>
                 </div>
                 
                 <div class="pag">

@@ -89,8 +89,13 @@ router.get('/adoption',ensureAuthenticated, ensureAuthenticatedAdmin, async (req
 })
 
 //pet post for admin
-router.get('/adoptionpost',ensureAuthenticated, ensureAuthenticatedAdmin ,(req, res) => {
-    res.render('adminPet' , {user: req.user})
+router.get('/adoption/listing/:id',ensureAuthenticated, ensureAuthenticatedAdmin , async (req, res) => {
+    try {
+        const post = await AdoptionPost.findById(req.params.id).populate('author').exec();
+        res.render('adminPet' , {user: req.user, post: post})
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 //admin user profile
@@ -98,16 +103,21 @@ router.get('/userprofile/:id',ensureAuthenticated, ensureAuthenticatedAdmin , as
     try {
         const user = await User.findById(req.params.id);
         const allPosts = await Post.find().where('author').equals(req.params.id).populate('author').sort({dateCreated: -1}).exec();
-        console.log(allPosts);
         res.render('adminPost' , {user: user, allPosts: allPosts})
     } catch (err) {
         console.log(err);
-    } 
+    }
 });
 
 //admin user profile sell
-router.get('/sellprofile',ensureAuthenticated, ensureAuthenticatedAdmin ,(req, res) => {
-    res.render('adminSell' , {user: req.user})
+router.get('/sellprofile/:id',ensureAuthenticated, ensureAuthenticatedAdmin , async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        const allPosts = await AdoptionPost.find().where('author').equals(req.params.id).populate('author').sort({dateCreated: -1}).exec();
+        res.render('adminSell' , {user: user, allPosts: allPosts})
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 //getting setting

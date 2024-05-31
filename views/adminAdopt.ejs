@@ -57,14 +57,14 @@
             </form>
 
             <div class="cards">
-                <%allPosts.forEach(adoptionPost => {%>
+                <%allPosts.forEach(post => {%>
                     <div class="card">
-                        <img src="<%=adoptionPost.image%>" alt="post image" class="postImage">
+                        <img src="<%=post.image%>" alt="post image" class="postImage">
 
                         <!--em thêm cái class post-title zô dòng 67 nhe-->
                         <div class="description">
                             <div>
-                                <div class="post-title"><%=adoptionPost.title%></div>
+                                <div class="post-title"><%=post.title%></div>
 
                                 <div class="dropdown">
                                     <button>...</button>
@@ -72,11 +72,11 @@
                                 </div>
                             </div>
                         
-                            <div class="money"><%=adoptionPost.price%></div> 
+                            <div class="money"><%=post.price%></div> 
                         </div>
                     
                         <div class="btn">
-                            <a href="/admin/adoptionpost"><div class="see-more">See more</div></a>
+                            <a href="/admin/adoption/listing/<%=post._id%>"><div class="see-more">See more</div></a>
                         </div>
                     </div>
                 <%})%>

@@ -36,22 +36,21 @@
 
             <div class="card" aria-label="Pet Information Card">
                 <div class="dog">
-                    <img src="/images/catcol1.jpg" alt="A cute dog">
+                    <img src="<%=post.image%>" alt="Pet Image">
                 </div>
                 <div class="info">
                     <div class="name">
-                        <h1>Happy Fat Lad</h1>
-                        <h2>$100</h2>
+                        <h1><%=post.title%></h1>
+                        <h2><%=post.price%></h2>
                     </div>
                     <div class="user">
-                        <img src="/images/catcol1.jpg" alt="User">
-                        <h4>Ranpo</h4>
+                        <img src="<%=post.author.profile%>" alt="Profile">
+                        <h4><%=post.author.username%></h4>
                         <button data-modal-target="#contact" aria-label="Contact Seller Button">Contact me</button>
                     </div>
                     <div class="description">
                         <h2>Description</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio commodi, vel ipsa voluptates nihil assumenda est. Minima quisquam voluptate exercitationem dolor omnis, officiis, dolores sequi voluptatibus sit reiciendis, voluptatem odit.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas distinctio quaerat hic repudiandae possimus ut ullam at aperiam dolorum, corporis culpa accusantium harum odio ea! Molestias ut omnis temporibus distinctio.</p>
+                        <p><%=post.description%></p>
                     </div>
                 </div>
             </div>
@@ -97,7 +96,8 @@
     
         <div class="modal-body">
             <div>Seller contact info:</div>
-            <div>motconvit123@gmail.com</div>
+            <div><%=post.author.email%></div>
+            <div><%=post.location%></div>
         </div>
     </div>
 
